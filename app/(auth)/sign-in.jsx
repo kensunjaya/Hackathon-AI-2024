@@ -15,7 +15,7 @@ const SignIn = () => {
     <View className="bg-thirdary">
       <ImageBackground
         source={images.loginImage}
-        className="w-full h-[25vh] justify-end flex flex-end align-top bg-thirdary"
+        className="w-full h-[30vh] justify-end flex flex-end align-top bg-thirdary"
         resizeMode="covern"
       />
       <View className="h-full">
