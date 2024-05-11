@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Alert } from "react-native";
 import React, { useState } from "react";
 import { Image } from "react-native";
 import { images } from "../../constants";
@@ -6,20 +6,27 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 const SignUp = () => {
   const [form, setForm] = useState({
     nik: "",
     namaLengkap: "",
-    tanggalLahir: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const submit = () => {
-    router.push("/home");
+    if (form.nik === "" || form.namaLengkap === "" || form.email === "" || form.password === "" || confirmPassword === "") {
+      Alert.alert('Error', 'Please fill in all the fields');
+    }
+    else if (form.password !== confirmPassword) {
+      Alert.alert('Error', 'Password does not match');
+    }
+    else {
+      router.push("/home");
+    }
   };
   return (
     <View>
@@ -29,8 +36,7 @@ const SignUp = () => {
         resizeMode="contain"
       />
       <View className="h-full bg-beige">
-        <ScrollView className="bg-primary h-full rounded-t-[40px] pt-3">
-          <View className="w-full justify-center px-4">
+        <ScrollView className="bg-primary h-full rounded-t-[40px] pt-3 w-full px-4">
             <FormField
               title="NIK"
               value={form.nik}
@@ -41,14 +47,14 @@ const SignUp = () => {
             <FormField
               title="Nama Lengkap"
               value={form.namaLengkap}
-              handleChangeText={(e) => setForm({ ...form, nik: e })}
+              handleChangeText={(e) => setForm({ ...form, namaLengkap: e })}
               otherStyles="mt-7"
               placeholder="Nama Lengkap"
             />
             <FormField
               title="Email"
               value={form.email}
-              handleChangeText={(e) => setForm({ ...form, nik: e })}
+              handleChangeText={(e) => setForm({ ...form, email: e })}
               otherStyles="mt-7"
               placeholder="Email"
             />
@@ -61,8 +67,8 @@ const SignUp = () => {
             />
             <FormField
               title="Password"
-              value={form.password}
-              handleChangeText={(e) => setForm({ ...form, password: e })}
+              value={confirmPassword}
+              handleChangeText={(e) => setConfirmPassword(e)}
               placeholder="Konfirmasi Password"
               otherStyles="mt-7"
             />
@@ -84,7 +90,7 @@ const SignUp = () => {
                 Login here
               </Link>
             </View>
-          </View>
+
         </ScrollView>
       </View>
     </View>
