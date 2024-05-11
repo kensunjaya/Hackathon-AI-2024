@@ -6,8 +6,12 @@ module.exports = {
       colors: {
         primary: "rgba(238, 245, 255, 1)",
         secondary: {
-          DEFAULT: "EEF5FF",
+          DEFAULT: "#FF9C01",
+          100: "#FF9001",
+          200: "#FF8E01",
         },
+        btn_primary: "#176B87",
+        btn_secondary: "#B4D4FF",
         black: {
           DEFAULT: "#000",
           100: "#1E1E2D",

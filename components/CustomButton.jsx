@@ -7,14 +7,14 @@ const CustomButton = (props) => {
   return (
     <TouchableOpacity
       onPress={props.handlePress}
-      activeOpacity={0.7}
-      className={`bg-secondary rounded-xl min-h-[62px] justify-center items-center ${
+      activeOpacity={1}
+      className={`rounded-full min-h-[62px] justify-center items-center ${
         props.containerStyles
       } ${isLoading ? "opacity-50" : ""}`}
       disabled={isLoading}
     >
       <Text
-        className={"text-primary font-psemibold text-lg ${props.textStyles}"}
+        className={`font-psemibold text-lg ${props.textStyles}`}
       >
         {props.title}
       </Text>
