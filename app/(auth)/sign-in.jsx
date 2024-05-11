@@ -4,22 +4,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 const SignIn = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const submit = () => {};
+  const submit = () => {
+    router.push("/home");
+  };
   return (
     <View>
       <Image
         source={images.loginImage}
-        className="w-full h-[31vh] justify-end flex flex-end align-top bg-thirdary"
-        resizeMode="contain"
+        className="w-full h-[31vh] justify-end flex flex-end align-top bg-beige"
+        resizeMode="covern"
       />
       <View className="h-full bg-beige">
-        <SafeAreaView className="bg-primary h-full rounded-t-[40px]">
+        <SafeAreaView className="bg-primary h-full rounded-t-[40px] pt-3">
           <ScrollView>
             <View className="w-full justify-center px-4">
               <FormField
@@ -59,7 +61,7 @@ const SignIn = () => {
           </ScrollView>
         </SafeAreaView>
       </View>
-      <StatusBar />
+      <StatusBar hidden={true}/>
     </View>
   );
 };

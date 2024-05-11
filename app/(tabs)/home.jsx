@@ -63,7 +63,7 @@ const Home = () => {
             </ScrollView>
           </SafeAreaView>
         </View>
-        <StatusBar />
+        <StatusBar hidden={false} />
     </View>
     
   );

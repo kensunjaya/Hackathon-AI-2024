@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Slot, SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import React, { useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
 
 SplashScreen.preventAutoHideAsync(); // prevent the splash screen from auto hiding
 
@@ -37,6 +38,7 @@ const RootLayout = () => {
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
 
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      
     </Stack>
   );
 };
