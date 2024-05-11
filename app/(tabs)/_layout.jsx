@@ -102,7 +102,7 @@ const TabsLayout = () => {
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.plus}
+                icon={icons.ongoing}
                 color={color}
                 name="Ongoing"
                 focused={focused}

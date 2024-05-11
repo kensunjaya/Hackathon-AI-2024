@@ -11,6 +11,7 @@ import eyeHide from "../assets/icons/eye-hide.png";
 import eye from "../assets/icons/eye.png";
 import play from "../assets/icons/play.png";
 import history from "../assets/icons/history.png";
+import ongoing from "../assets/icons/ongoing.png";
 
 export default {
   play,
@@ -26,4 +27,5 @@ export default {
   eyeHide,
   eye,
   history,
+  ongoing,
 };
