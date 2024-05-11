@@ -12,6 +12,7 @@ module.exports = {
         },
         btn_primary: "#176B87",
         btn_secondary: "#B4D4FF",
+        thirdary: "rgba(252, 248, 236, 1)",
         bluesk: "#77A4E5",
         beige: "#FCF8EC",
         black: {
