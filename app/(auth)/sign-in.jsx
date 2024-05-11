@@ -13,6 +13,7 @@ const SignIn = () => {
   const submit = () => {
     router.push("/home");
   };
+
   return (
     <View>
       <Image
@@ -61,7 +62,7 @@ const SignIn = () => {
           </ScrollView>
         </SafeAreaView>
       </View>
-      <StatusBar hidden={true}/>
+      <StatusBar />
     </View>
   );
 };
