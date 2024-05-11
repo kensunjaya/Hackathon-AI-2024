@@ -29,7 +29,7 @@ const Home = () => {
         <View className="h-full bg-bluesk">
           <SafeAreaView className="pt-[1rem] relative h-full bg-primary rounded-t-[40px]">
             <ScrollView>
-              <Text className="text-2xl text-center font-psemibold">Selamat Siang, Sherly</Text>
+              <Text className="text-2xl text-center font-psemibold">Selamat Siang, Beni</Text>
               <Text className="text-sm text-center font-pregular mt-[1vh]">Silakan pilih cabang bank yang ingin Anda tuju</Text>
               <View className="flex-row">
                 <FlatList
