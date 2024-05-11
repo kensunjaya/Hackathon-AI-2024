@@ -10,8 +10,9 @@ import img1 from "../assets/images/img1.png";
 import fuzebank from "../assets/images/fuzebank.png";
 import beanbank from "../assets/images/beanbank.png";
 import historybg from "../assets/images/historybg.png";
+import registerImage from "../assets/images/RegisterImage.png";
 
-export default { 
+export default {
   profile,
   thumbnail,
   cards,
@@ -24,4 +25,5 @@ export default {
   fuzebank,
   beanbank,
   historybg,
+  registerImage,
 };
