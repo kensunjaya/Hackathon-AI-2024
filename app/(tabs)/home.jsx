@@ -3,11 +3,11 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images, icons } from "../../constants";
 import { StatusBar } from "expo-status-bar";
-import CustomCard from "../../components/CustomCard";
+import { CustomCardHome }  from "../../components/CustomCard";
 
 const Home = () => {
   let id = 0;
-  const cardData = [{
+  const cardData = [{ // dummy data
     title: "Bank Fuze",
     cabang: "Kantor Pusat",
     logo: images.fuzebank,
@@ -29,7 +29,7 @@ const Home = () => {
         <View className="h-full bg-bluesk">
           <SafeAreaView className="pt-[1rem] relative h-full bg-primary rounded-t-[40px]">
             <ScrollView>
-              <Text className="text-2xl text-center font-psemibold">Selamat Siang, Beni</Text>
+              <Text className="text-2xl text-center font-psemibold">Selamat Siang, Hanseu</Text>
               <Text className="text-sm text-center font-pregular mt-[1vh]">Silakan pilih cabang bank yang ingin Anda tuju</Text>
               <View className="flex-row">
                 <FlatList
@@ -37,7 +37,7 @@ const Home = () => {
                   data={cardData}
                   keyExtractor={(item) => {return item.id}}
                   renderItem={({ item }) => (
-                    <CustomCard 
+                    <CustomCardHome 
                       title={item.title}
                       subtitle={item.cabang}
                       logo={item.logo}

@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const Create = () => {
+const Ongoing = () => {
   return (
     <View>
-      <Text>Create</Text>
+      <Text>Ongoing</Text>
     </View>
   );
 };
 
-export default Create;
+export default Ongoing;

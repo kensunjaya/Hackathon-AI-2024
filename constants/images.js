@@ -9,6 +9,7 @@ import loginImage from "../assets/images/LoginImage.png";
 import img1 from "../assets/images/img1.png";
 import fuzebank from "../assets/images/fuzebank.png";
 import beanbank from "../assets/images/beanbank.png";
+import historybg from "../assets/images/historybg.png";
 
 export default { 
   profile,
@@ -22,4 +23,5 @@ export default {
   img1,
   fuzebank,
   beanbank,
+  historybg,
 };
