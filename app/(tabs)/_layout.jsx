@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   icon: {
-    width: 24,
-    height: 24,
+    width: 26,
+    height: 26,
   },
   textRegular: {
     fontSize: 12,
@@ -38,7 +38,7 @@ const TabIcon = ({ icon, color, name, focused }) => {
         className="w-6 h-6"
       />
       <Text
-        className={`${focused ? "font-psemibold" : "font-pregular"}text-xs`}
+        className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
         style={{
           color: focused ? "rgba(134, 182, 246, 1)" : "rgba(238, 245, 255, 1)",
         }}
@@ -55,14 +55,14 @@ const TabsLayout = () => {
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
-          tabBarStyle: {
-            backgroundColor: "rgba(180, 212, 255, 1)",
-          },
           tabBarActiveTintColor: "rgba(134, 182, 246, 1)",
           tabBarInactiveTintColor: "rgba(238, 245, 255, 1)",
-          borderTopColor: "transparent",
-          borderTopWidth: 1,
-          heigth: 84,
+          tabBarStyle: {
+            backgroundColor: "rgba(180, 212, 255, 1)",
+            height: 72,
+            borderTopColor: "transparent",
+            borderTopWidth: 1,
+          },
         }}
       >
         <Tabs.Screen
@@ -87,7 +87,7 @@ const TabsLayout = () => {
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.bookmark}
+                icon={icons.history}
                 color={color}
                 name="History"
                 focused={focused}
@@ -102,7 +102,7 @@ const TabsLayout = () => {
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.plus}
+                icon={icons.ongoing}
                 color={color}
                 name="Ongoing"
                 focused={focused}

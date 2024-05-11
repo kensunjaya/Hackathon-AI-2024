@@ -13,6 +13,8 @@ module.exports = {
         btn_primary: "#176B87",
         btn_secondary: "#B4D4FF",
         thirdary: "rgba(252, 248, 236, 1)",
+        bluesk: "#77A4E5",
+        beige: "#FCF8EC",
         black: {
           DEFAULT: "#000",
           100: "#1E1E2D",
@@ -20,6 +22,7 @@ module.exports = {
         },
         gray: {
           100: "#CDCDE0",
+          200: "#8E8E8E",
         },
       },
       fontFamily: {
