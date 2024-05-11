@@ -33,7 +33,6 @@ export default function App() {
           </View>
           <CustomButton
             title="Login"
-
             handlePress={() => router.push("/sign-in")}
             containerStyles="w-full mt-7 bg-btn_primary"
             textStyles="text-white"
