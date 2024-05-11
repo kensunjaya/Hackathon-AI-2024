@@ -15,8 +15,8 @@ const SignIn = () => {
     <View className="bg-thirdary">
       <ImageBackground
         source={images.loginImage}
-        className="w-full h-[30vh] justify-end flex flex-end align-top bg-thirdary"
-        resizeMode="covern"
+        className="w-full h-[31vh] justify-end flex flex-end align-top bg-thirdary"
+        resizeMode="contain"
       />
       <View className="h-full">
         <SafeAreaView className="bg-primary h-full rounded-t-[40px]">
