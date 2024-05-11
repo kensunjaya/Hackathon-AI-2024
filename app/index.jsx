@@ -35,12 +35,13 @@ export default function App() {
             title="Login"
             handlePress={() => router.push("/sign-in")}
             containerStyles="w-full mt-7"
-            color="bg-secondary"
+            color="rgba(23, 107, 135, 1)"
           />
           <CustomButton
             title="Register"
             handlePress={() => router.push("/sign-up")}
             containerStyles="w-full mt-7"
+            color="rgba(180, 212, 255, 1)"
           />
         </View>
       </ScrollView>
