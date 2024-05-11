@@ -12,16 +12,16 @@ const SignIn = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const submit = () => {};
   return (
-    <View className="bg-thirdary">
-      <ImageBackground
+    <View>
+      <Image
         source={images.loginImage}
         className="w-full h-[31vh] justify-end flex flex-end align-top bg-thirdary"
         resizeMode="contain"
       />
-      <View className="h-full">
+      <View className="h-full bg-beige">
         <SafeAreaView className="bg-primary h-full rounded-t-[40px]">
           <ScrollView>
-            <View className="w-full justify-center px-4 mt-6">
+            <View className="w-full justify-center px-4">
               <FormField
                 title="Email"
                 value={form.email}
@@ -45,7 +45,7 @@ const SignIn = () => {
                 isLoading={isSubmitting}
               />
               <View className="justify-center pt-5 flex-row gap-2">
-                <Text className="text-lg text-gray-100 font-pregular">
+                <Text className="text-lg text-black font-pregular">
                   Don't have account?
                 </Text>
                 <Link

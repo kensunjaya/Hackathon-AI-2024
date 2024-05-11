@@ -11,7 +11,7 @@ const FormField = (props) => {
           className="flex-1 text-black font-psemibold text-base"
           value={props.value}
           placeholder={props.placeholder}
-          placeholderTextColor="#858585"
+          placeholderTextColor="#D1D1D1"
           onChangeText={props.handleChangeText}
           secureTextEntry={props.title === "Password" && !showPassword}
         />
