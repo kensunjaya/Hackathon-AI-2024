@@ -1,3 +1,4 @@
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView, Text, View } from "react-native";
 import { Redirect, router } from "expo-router";
@@ -16,7 +17,7 @@ export default function App() {
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
         <View className="w-full justify-center items-center min-h-[100vh] px-4">
-          <View style={{ paddingTop: -20 }}>
+          <View>
             <Image
               source={images.logo}
               className="w-[226.09px] h-[223px]"
@@ -45,7 +46,7 @@ export default function App() {
           />
         </View>
       </ScrollView>
-      <StatusBar backgroundColor="rgba(238, 245, 255, 1)" style="dark" />
+      <StatusBar />
       <View className="flex-1 items-center justify-center"></View>
     </SafeAreaView>
   );

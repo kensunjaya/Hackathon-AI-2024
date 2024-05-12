@@ -16,6 +16,7 @@ const SignIn = () => {
 
   return (
     <View>
+      <StatusBar />
       <Image
         source={images.loginImage}
         className="w-full h-[31vh] justify-end flex flex-end align-top bg-beige"
