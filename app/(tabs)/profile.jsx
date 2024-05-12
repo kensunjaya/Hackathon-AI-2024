@@ -1,11 +1,16 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { images } from "../../constants";
+import { Image } from "react-native";
+import SearchInput from "../../components/SearchInput";
 
 const profile = () => {
+  const [form, setForm] = useState({ email: "", password: "" });
   return (
-    <View>
-      <Text>profile</Text>
-    </View>
+    <SafeAreaView className="bg-primary h-full">
+      <Text>Profile</Text>
+    </SafeAreaView>
   );
 };
 
