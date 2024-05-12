@@ -12,6 +12,7 @@ import beanbank from "../assets/images/beanbank.png";
 import seidelbank from "../assets/images/seidelbank.png";
 import historybg from "../assets/images/historybg.png";
 import registerImage from "../assets/images/RegisterImage.png";
+import addbankbg from "../assets/images/addbankbg.png";
 
 export default {
   profile,
@@ -28,4 +29,5 @@ export default {
   seidelbank,
   historybg,
   registerImage,
+  addbankbg,
 };
