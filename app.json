@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "test",
-    "slug": "test",
-    "scheme": "aora",
+    "name": "baits",
+    "slug": "baits",
+    "scheme": "Baits",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
