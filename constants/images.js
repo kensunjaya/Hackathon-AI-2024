@@ -9,6 +9,7 @@ import loginImage from "../assets/images/LoginImage.png";
 import img1 from "../assets/images/img1.png";
 import fuzebank from "../assets/images/fuzebank.png";
 import beanbank from "../assets/images/beanbank.png";
+import seidelbank from "../assets/images/seidelbank.png";
 import historybg from "../assets/images/historybg.png";
 import registerImage from "../assets/images/RegisterImage.png";
 
@@ -24,6 +25,7 @@ export default {
   img1,
   fuzebank,
   beanbank,
+  seidelbank,
   historybg,
   registerImage,
 };

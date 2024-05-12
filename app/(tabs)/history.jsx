@@ -8,10 +8,17 @@ import { CustomCardHistory } from "../../components/CustomCard";
 const History = () => {
   let id = 0;
   const cardData = [{ // dummy data
-    date: "27 April 2024",
+    date: "6 Mei 2024",
     title: "Permohonan pembuatan kartu kredit",
     cabang: "Kantor Pusat",
     logo: images.fuzebank,
+    id: id++,
+  },
+  {
+    date: "27 April 2024",
+    title: "Pembuatan rekening baru",
+    cabang: "KCP Galaxy",
+    logo: images.seidelbank,
     id: id++,
   },
   {
@@ -65,6 +72,8 @@ const History = () => {
                   <Text className="text-center font-psemibold text-lg mt-5">Tidak ada riwayat kegiatan</Text>
                 </View>
               )}
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
               // refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
             />
           </View>
