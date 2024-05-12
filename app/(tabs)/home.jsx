@@ -13,12 +13,13 @@ const Home = () => {
     logo: images.fuzebank,
     id: id++,
   },
-  {
-    title: "Bean Bank",
-    cabang: "KCP Andromeda",
-    logo: images.beanbank,
-    id: id++,
-  }]
+  // {
+  //   title: "Bean Bank",
+  //   cabang: "KCP Andromeda",
+  //   logo: images.beanbank,
+  //   id: id++,
+  // }
+]
   // const cardData = []
   return (
     <View>
@@ -28,10 +29,9 @@ const Home = () => {
           resizeMode="covern" />
         <View className="h-full bg-bluesk">
           <SafeAreaView className="pt-[1rem] relative h-full bg-primary rounded-t-[40px]">
-            <ScrollView>
-              <Text className="text-2xl text-center font-psemibold">Selamat Siang, Hanseu</Text>
-              <Text className="text-sm text-center font-pregular mt-[1vh]">Silakan pilih cabang bank yang ingin Anda tuju</Text>
-              <View className="flex-row">
+              <Text className="text-2xl text-center font-psemibold">Selamat Siang, Budi</Text>
+              <Text className="text-xs text-center font-pregular mt-[1vh]">Silakan pilih cabang bank yang ingin Anda tuju</Text>
+              <View className="flex-row border">
                 <FlatList
                   // className="border"
                   data={cardData}
@@ -44,6 +44,7 @@ const Home = () => {
                     />
                   )}
                   horizontal
+                  className="border"
                   // refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
                 />
                 <View className="h-[20vh] w-[12.5vh] bg-white rounded-[20px] ml-[2.5vh] mr-[2.5vh] mt-[3vh] flex justify-end">
@@ -60,7 +61,6 @@ const Home = () => {
                   </View>
                 </View>
               </View>
-            </ScrollView>
           </SafeAreaView>
         </View>
         <StatusBar hidden={false} />
