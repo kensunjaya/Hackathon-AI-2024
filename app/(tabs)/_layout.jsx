@@ -81,9 +81,9 @@ const TabsLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="bookmark"
+          name="history"
           options={{
-            title: "bookmark",
+            title: "history",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
@@ -96,9 +96,9 @@ const TabsLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="create"
+          name="ongoing"
           options={{
-            title: "create",
+            title: "ongoing",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
