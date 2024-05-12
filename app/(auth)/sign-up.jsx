@@ -29,14 +29,14 @@ const SignUp = () => {
     }
   };
   return (
-    <View>
+    <View className="flex-1">
       <Image
         source={images.registerImage}
         className="w-full h-[25vh] justify-end flex flex-end align-top bg-thirdary"
         resizeMode="contain"
       />
-      <View className="h-full bg-beige">
-        <ScrollView className="bg-primary h-full rounded-t-[40px] pt-3 w-full px-4">
+      <View className="h-full bg-beige flex-1">
+        <ScrollView className="bg-primary h-full rounded-t-[40px] pt-3 w-full px-4 flex-1">
             <FormField
               title="NIK"
               value={form.nik}
@@ -79,13 +79,13 @@ const SignUp = () => {
               textStyles="text-white"
               isLoading={isSubmitting}
             />
-            <View className="justify-center pt-5 flex-row gap-2">
-              <Text className="text-lg text-black font-pregular">
+            <View className="justify-center pt-5 flex-row gap-2 mb-10">
+              <Text className="text-[14px] text-black font-pregular">
                 Already have an account?
               </Text>
               <Link
                 href="/sign-in"
-                className="text-lg font-psemibold text-btn_primary"
+                className="text-[14px] font-psemibold text-btn_primary"
               >
                 Login here
               </Link>

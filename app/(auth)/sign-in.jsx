@@ -22,7 +22,7 @@ const SignIn = () => {
         resizeMode="covern"
       />
       <View className="h-full bg-beige">
-        <SafeAreaView className="bg-primary h-full rounded-t-[40px] pt-3">
+        <SafeAreaView className="bg-primary h-full rounded-t-[40px]">
           <ScrollView>
             <View className="w-full justify-center px-4">
               <FormField
@@ -48,12 +48,12 @@ const SignIn = () => {
                 isLoading={isSubmitting}
               />
               <View className="justify-center pt-5 flex-row gap-2">
-                <Text className="text-lg text-black font-pregular">
+                <Text className="text-black font-pregular text-[14px]">
                   Don't have account?
                 </Text>
                 <Link
                   href="/sign-up"
-                  className="text-lg font-psemibold text-btn_primary"
+                  className="font-psemibold text-btn_primary text-[14px]"
                 >
                   Register here
                 </Link>
