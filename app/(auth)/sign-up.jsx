@@ -6,14 +6,13 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
-import { Link } from "expo-router";
-import { router } from "expo-router";
 import { Link, router } from "expo-router";
 
 const SignUp = () => {
   const [form, setForm] = useState({
     nik: "",
     namaLengkap: "",
+    tanggalLahir: "",
     email: "",
     password: "",
   });
@@ -23,6 +22,7 @@ const SignUp = () => {
     if (
       form.nik === "" ||
       form.namaLengkap === "" ||
+      form.tanggalLahir === "" ||
       form.email === "" ||
       form.password === "" ||
       confirmPassword === ""
@@ -36,6 +36,7 @@ const SignUp = () => {
   };
   return (
     <View className="flex-1">
+      <StatusBar />
       <Image
         source={images.registerImage}
         className="w-full h-[25vh] justify-end flex flex-end align-top bg-thirdary"
@@ -56,6 +57,13 @@ const SignUp = () => {
             handleChangeText={(e) => setForm({ ...form, namaLengkap: e })}
             otherStyles="mt-7"
             placeholder="Nama Lengkap"
+          />
+          <FormField
+            title="Tanggal Lahir"
+            value={form.tanggalLahir}
+            handleChangeText={(e) => setForm({ ...form, tanggalLahir: e })}
+            otherStyles="mt-7"
+            placeholder="Tanggal Lahir"
           />
           <FormField
             title="Email"
