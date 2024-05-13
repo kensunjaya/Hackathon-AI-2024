@@ -22,9 +22,10 @@ const SignUp = () => {
     if (
       form.nik === "" ||
       form.namaLengkap === "" ||
-      form.tanggalLahir === "" ||
+      form.noTelp === "" ||
       form.email === "" ||
       form.password === "" ||
+      form.noRekening === "" ||
       confirmPassword === ""
     ) {
       Alert.alert("Error", "Please fill in all the fields");
@@ -59,11 +60,11 @@ const SignUp = () => {
             placeholder="Nama Lengkap"
           />
           <FormField
-            title="Tanggal Lahir"
-            value={form.tanggalLahir}
-            handleChangeText={(e) => setForm({ ...form, tanggalLahir: e })}
+            title="Nomer Telepon"
+            value={form.noTelp}
+            handleChangeText={(e) => setForm({ ...form, noTelp: e })}
             otherStyles="mt-7"
-            placeholder="Tanggal Lahir"
+            placeholder="Nomer Telepon"
           />
           <FormField
             title="Email"
@@ -71,6 +72,13 @@ const SignUp = () => {
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
             placeholder="Email"
+          />
+          <FormField
+            title="No Rekening"
+            value={form.noRekening}
+            handleChangeText={(e) => setForm({ ...form, noRekening: e })}
+            otherStyles="mt-7"
+            placeholder="No Rekening"
           />
           <FormField
             title="Password"
