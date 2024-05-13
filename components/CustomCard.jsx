@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { icons } from "../constants";
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -7,7 +7,10 @@ const CustomCardHome = (props) => {
 
   if (props.title !== "") {
     return (
-      <View className="min-h-[20vh] min-w-[12.5vh] bg-white rounded-[20px] mr-[2.5vh] mt-[3vh] flex justify-end">
+      <TouchableOpacity 
+        className="min-h-[20vh] min-w-[12.5vh] bg-white rounded-[20px] mr-[2.5vh] mt-[3vh] flex justify-end"
+        onPress={props.handlePress}
+        activeOpacity={0.7}>
         <View className="pb-[3vh] items-center">
           <Image 
             source={props.logo}
@@ -19,12 +22,15 @@ const CustomCardHome = (props) => {
           <Text className="font-pregular text-gray-200 text-sm text-center">{props.title}</Text>
           <Text className="font-pregular text-gray-200 text-[10px] text-center">{props.subtitle}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
   else {
     return (
-      <View className="h-[20vh] w-[12.5vh] bg-white rounded-[20px] mt-[3vh] flex justify-end">
+      <TouchableOpacity 
+        className="h-[20vh] w-[12.5vh] bg-white rounded-[20px] mt-[3vh] flex justify-end"
+        onPress={props.handlePress}
+        activeOpacity={0.7}>
         <View className="pb-[4vh]">
           <Text className="font-pregular text-gray-200 text-sm text-center">Tambah</Text>
           <Text className="font-pregular text-gray-200 text-sm text-center">bank lain</Text>
@@ -36,7 +42,7 @@ const CustomCardHome = (props) => {
             resizeMode="contain"
           />
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
   
