@@ -6,10 +6,9 @@ import { Image } from "react-native";
 import SearchInput from "../../components/SearchInput";
 
 const profile = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
   return (
     <SafeAreaView className="bg-primary h-full">
-      <Text>Profile</Text>
+      <FlatList />
     </SafeAreaView>
   );
 };
