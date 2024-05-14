@@ -9,6 +9,9 @@ import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../config/firebase';
+import { db, collection, addDoc } from '../config/firebase';
+import { getFirestore } from "firebase/firestore";
+import {doc, setDoc} from "firebase/firestore";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -20,20 +23,7 @@ const SignUp = () => {
   });
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async () => {
-    if (form.email !== "" && form.password !== "") {
-      try {
-        await createUserWithEmailAndPassword(auth, form.email, form.password);
-      } catch (err) {
-        Alert.alert("Error", err.message);
-        console.log(err.message);
-      }
-    }
-  }
-
-
-  const submit = () => {
+  const submit = async () => {
     if (
       form.nik === "" ||
       form.namaLengkap === "" ||
@@ -47,9 +37,37 @@ const SignUp = () => {
     } else if (form.password !== confirmPassword) {
       Alert.alert("Error", "Password does not match");
     } else {
-      router.push("/home");
+      try{
+          setIsSubmitting(true);
+          const docRef = await addDoc(collection(db, "users"),{
+            nik: form.nik,
+            namaLengkap: form.namaLengkap,
+            noTelp: form.noTelp,
+            email: form.email,
+            noRekening: form.noRekening,
+          });
+        console.log("Document written with ID: ", docRef.id);
+      }
+      catch(e){
+        console.error("Error adding document: ", e);
+      }
+      finally{
+        setIsSubmitting(false);
+        router.push("/home");
+      }
     }
   };
+  const handleSubmit = async () => {
+    if (form.email !== "" && form.password !== "") {
+      try {
+        await createUserWithEmailAndPassword(auth, form.email, form.password);
+        submit();
+      } catch (err) {
+        Alert.alert("Error", err.message);
+        console.log(err.message);
+      }
+    }
+  }
   return (
     <View className="flex-1">
       <StatusBar />
