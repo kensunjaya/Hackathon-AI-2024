@@ -7,6 +7,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../config/firebase';
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -18,6 +20,19 @@ const SignUp = () => {
   });
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async () => {
+    if (form.email !== "" && form.password !== "") {
+      try {
+        await createUserWithEmailAndPassword(auth, form.email, form.password);
+      } catch (err) {
+        Alert.alert("Error", err.message);
+        console.log(err.message);
+      }
+    }
+  }
+
+
   const submit = () => {
     if (
       form.nik === "" ||
@@ -96,7 +111,7 @@ const SignUp = () => {
           />
           <CustomButton
             title="Register"
-            handlePress={submit}
+            handlePress={handleSubmit}
             containerStyles="w-full mt-7 bg-btn_primary"
             textStyles="text-white"
             isLoading={isSubmitting}
