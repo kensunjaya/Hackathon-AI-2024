@@ -57,7 +57,7 @@ const AddBank = () => {
     ) {
       Alert.alert("Error", "Please fill in all the fields");
     } else {
-      router.push("/home");
+      roaauter.push("/home");
     }
   };
   return (
@@ -106,7 +106,7 @@ const AddBank = () => {
           <FormField
             title="Postal Code"
             value={form.kodepos}
-            handleChangeText={(e) => setForm({ ...form, namaLengkap: e })}
+            handleChangeText={(e) => setForm({ ...form, kodepos: e })}
             otherStyles="mt-7"
             placeholder="Kode Pos"
           />
@@ -130,7 +130,7 @@ const AddBank = () => {
           <FormField
             title="Card Number"
             value={form.nomorkartu}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
+            handleChangeText={(e) => setForm({ ...form, nomorkartu: e })}
             otherStyles="mt-7"
             placeholder="Nomor Kartu"
           />

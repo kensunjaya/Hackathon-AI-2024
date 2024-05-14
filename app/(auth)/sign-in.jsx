@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView, ImageBackground } from "react-native";
+import { View, Text, Image, ScrollView, ImageBackground, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
@@ -6,12 +6,26 @@ import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../config/firebase";
 
 const SignIn = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const submit = () => {
-    router.push("/home");
+  const submit = async () => {
+    try {
+      const succeed = await signInWithEmailAndPassword(auth, form.email, form.password);
+      if (succeed) {
+        router.push('/home');
+      }
+      else {
+        Alert.alert("Error", "Invalid credential");
+      }
+    }
+    catch (err) {
+      Alert.alert("Error", err.message);
+      console.log(err.message);
+    }
   };
 
   return (
