@@ -7,23 +7,36 @@ import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { get } from "firebase/database";
 
 const SignIn = () => {
+  const getTest = async () => {
+    try {
+      const docRef = doc(db, "users", form.email)
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        Alert.alert("Welcome", docSnap.data().namaLengkap);
+        router.push('/home');
+      } else {
+        console.log("No such document!");
+      }
+    }
+    catch (e) {
+      console.error("Error getting document:", e);
+    }  
+  }
+
   const [form, setForm] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const submit = async () => {
     try {
-      const succeed = await signInWithEmailAndPassword(auth, form.email, form.password);
-      if (succeed) {
-        router.push('/home');
-      }
-      else {
-        Alert.alert("Error", "Invalid credential");
-      }
+      await signInWithEmailAndPassword(auth, form.email, form.password);
+      getTest();
     }
     catch (err) {
-      Alert.alert("Error", err.message);
+      Alert.alert("Error", "Invalid Credential");
       console.log(err.message);
     }
   };

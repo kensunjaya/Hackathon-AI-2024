@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, Alert } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image } from "react-native";
 import { images } from "../../constants";
 import { StatusBar } from "expo-status-bar";
@@ -10,7 +10,7 @@ import { Link, router } from "expo-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../config/firebase';
 import { db, collection, addDoc } from '../config/firebase';
-import { getFirestore } from "firebase/firestore";
+import { getDoc, getFirestore } from "firebase/firestore";
 import {doc, setDoc} from "firebase/firestore";
 
 const SignUp = () => {
@@ -23,6 +23,7 @@ const SignUp = () => {
   });
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const submit = async () => {
     if (
       form.nik === "" ||
@@ -39,21 +40,20 @@ const SignUp = () => {
     } else {
       try{
           setIsSubmitting(true);
-          const docRef = await addDoc(collection(db, "users"),{
+          const docRef = await setDoc(doc(db, "users", form.email),{
             nik: form.nik,
             namaLengkap: form.namaLengkap,
             noTelp: form.noTelp,
             email: form.email,
             noRekening: form.noRekening,
           });
-        console.log("Document written with ID: ", docRef.id);
       }
       catch(e){
         console.error("Error adding document: ", e);
       }
       finally{
         setIsSubmitting(false);
-        router.push("/home");
+        router.push("/sign-in");
       }
     }
   };
