@@ -1,12 +1,21 @@
 import { View, Text, Image, ImageBackground, FlatList, ScrollView } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images, icons } from "../../constants";
 import { StatusBar } from "expo-status-bar";
 import { CustomCardHome }  from "../../components/CustomCard";
 import { router } from "expo-router";
+import useAuth from "../hooks/useAuth";
+import getUser from "../../utility/backend";
+import { useUser, useUserUpdate } from "../hooks/Context";
+import { auth } from "../config/firebase";
+// import { useGlobalContext } from "../hooks/Context";
+
 
 const Home = () => {
+  const userData = useUser();
+  console.log("UserDATA", userData);
+  // console.log(useAuth().user.email);
   let id = 0;
   const cardData = [{ // dummy data
     title: "Bank Fuze",
@@ -40,7 +49,7 @@ const Home = () => {
           resizeMode="covern" />
         <View className="h-full bg-bluesk">
           <SafeAreaView className="pt-[1rem] relative h-full bg-primary rounded-t-[40px]">
-              <Text className="text-2xl text-center font-psemibold">Selamat Siang, User</Text>
+              <Text className="text-2xl text-center font-psemibold">Selamat Siang, {userData.namaLengkap}</Text>
               <Text className="text-xs text-center font-pregular mt-[1vh]">Silakan pilih cabang bank yang ingin Anda tuju</Text>
               <View className="flex-row mx-5">
                 <FlatList

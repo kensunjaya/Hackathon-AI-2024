@@ -18,11 +18,7 @@ const useAuth = () => {
     return unsub;
   }, [])
 
-  return (
-    <View>
-      <Text>useAuth</Text>
-    </View>
-  )
+  return { user }
 }
 
 export default useAuth
