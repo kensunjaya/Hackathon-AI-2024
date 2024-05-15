@@ -71,4 +71,24 @@ const CustomCardHistory = (props) => {
   )
 }
 
-export { CustomCardHome, CustomCardHistory }
+const CustomCardRekening = (props) => {
+  return (
+    <View className="bg-white rounded-[20px] mb-[3vh] flex p-5">
+      <View className="items-end flex-row">
+        <View>
+          <Text className="font-psemibold text-gray-200 text-sm mb-3">Rekening {props.namabank}</Text>
+          <Text className="text-gray-200 text-xl">{props.norek}</Text>
+        </View>
+        <View className="ml-auto">
+        <Image 
+          src={props.logo}
+          className="w-[6vh] h-[6vh]"
+          resizeMode="contain"
+        />
+        </View>
+      </View>
+    </View>
+  )
+}
+
+export { CustomCardHome, CustomCardHistory, CustomCardRekening }

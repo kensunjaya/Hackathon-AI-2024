@@ -12,13 +12,25 @@ import { auth } from '../config/firebase';
 import { db, collection, addDoc } from '../config/firebase';
 import { getDoc, getFirestore } from "firebase/firestore";
 import {doc, setDoc} from "firebase/firestore";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const SignUp = () => {
+  const [bankOpen, setBankOpen] = useState(false);
+  const [bankValue, setBankValue] = useState(null);
+  const [bankData, setBankData] = useState([
+    { label: '  Seidel Bank', value: { name: 'Seidel', logo: "https://imgur.com/gt1wbcv.png" } },
+    { label: '  Fuze Bank', value: { name: 'Fuze', logo: "https://imgur.com/xq94KtM.png" } },
+    { label: '  Bean Bank', value: { name: 'Bean', logo: "https://imgur.com/Qyb3EVr.png" } },
+    { label: '  Andro Bank', value: { name : 'Andro', logo: "https://imgur.com/bPZFRKh.png" } },
+  ]);
+  
   const [form, setForm] = useState({
     nik: "",
     namaLengkap: "",
-    tanggalLahir: "",
+    noTelp: "",
     email: "",
+    namabank: "",
+    noRekening: "",
     password: "",
   });
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -31,6 +43,7 @@ const SignUp = () => {
       form.noTelp === "" ||
       form.email === "" ||
       form.password === "" ||
+      !bankValue ||
       form.noRekening === "" ||
       confirmPassword === ""
     ) {
@@ -45,7 +58,7 @@ const SignUp = () => {
             namaLengkap: form.namaLengkap,
             noTelp: form.noTelp,
             email: form.email,
-            noRekening: [form.noRekening],
+            rekening: [{namabank : bankValue.name, norek: form.noRekening, logo: bankValue.logo }], // at least 1 rekening didaftarkan saat registrasi
             riwayat: [],
           });
       }
@@ -106,6 +119,24 @@ const SignUp = () => {
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
             placeholder="Email"
+          />
+          <DropDownPicker
+            open={bankOpen}
+            value={bankValue}
+            items={bankData}
+            setOpen={setBankOpen}
+            setValue={setBankValue}
+            setItems={setBankData}
+            placeholder="  Pilih Bank"
+            style={{borderWidth: 0, borderRadius: 25, height: 62, backgroundColor: 'white', marginTop: 25}}
+            textStyle={{
+              fontSize: 15,
+              fontFamily: 'Poppins-SemiBold',
+              color: (bankValue ? 'black' : '#D1D1D1'),
+            }}
+            zIndex={9999}
+            listMode="SCROLLVIEW"
+            dropDownContainerStyle={{borderWidth: 0, borderRadius: 20, backgroundColor: 'white'}}
           />
           <FormField
             title="No Rekening"

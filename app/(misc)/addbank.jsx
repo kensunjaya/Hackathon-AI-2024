@@ -7,57 +7,52 @@ import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
 import DropDownPicker from 'react-native-dropdown-picker';
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
+import { useUser, useUserUpdate } from "../hooks/Context";
 
 const AddBank = () => {
+  const userData = useUser();
+  const updateUserDataContext = useUserUpdate();
+  const dataRekening = userData.rekening;
+  
   const [bankOpen, setBankOpen] = useState(false);
-  const [cityOpen, setCityOpen] = useState(false);
-  const [cabangOpen, setCabangOpen] = useState(false);
+  const [bankValue, setBankValue] = useState(null);
 
-  const [bankValue, setValue] = useState(null);
-  const [cityValue, setCityValue] = useState(null);
-  const [cabangValue, setCabangValue] = useState(null);
-
-  const [form, setForm] = useState({
-    kodepos: "",
-    nomorkartu: "",
-  });
+  const [norek, setNorek] = useState("");
 
   const [bankData, setBankData] = useState([
-    { label: '  Seidel Bank', value: 'seidel' },
-    { label: '  Fuze Bank', value: 'fuze' },
-    { label: '  Bean Bank', value: 'bean' },
+    { label: '  Seidel Bank', value: { name: 'Seidel', logo: "https://imgur.com/gt1wbcv.png" } },
+    { label: '  Fuze Bank', value: { name: 'Fuze', logo: "https://imgur.com/xq94KtM.png" } },
+    { label: '  Bean Bank', value: { name: 'Bean', logo: "https://imgur.com/Qyb3EVr.png" } },
+    { label: '  Andro Bank', value: { name : 'Andro', logo: "https://imgur.com/bPZFRKh.png" } },
   ]);
-  const [cityData, setCityData] = useState([
-    { label: '  Kota Bandung', value: 'bandung' },
-    { label: '  Kota Jakarta', value: 'jakarta' },
-    { label: '  Kota Semarang', value: 'semarang' },
-    { label: '  Kota Surabaya', value: 'surabaya' },
-    { label: '  Kota Padang', value: 'padang' },
-    { label: '  Kota Palembang', value: 'palembang' },
-    { label: '  Kota Pekanbaru', value: 'pekanbaru' },
-    { label: '  Kota Medan', value: 'medan' },
-  ]);
-  const [cabangData, setCabangData] = useState([
-    { label: '  Kantor Pusat', value: 'pusat' },
-    { label: '  KCP Buahbatu', value: 'buahbatu' },
-    { label: '  KCP Sudirman', value: 'sudirman' },
-    { label: '  KCP Merdeka', value: 'merdeka' },
-  ]);
-
-  const [confirmPassword, setConfirmPassword] = useState("");
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = () => {
-    if (
-      form.nomorkartu === "" ||
-      form.kodepos === "" ||
-      !bankValue ||
-      !cabangValue ||
-      !cityValue 
-    ) {
-      Alert.alert("Error", "Please fill in all the fields");
-    } else {
-      roaauter.push("/home");
+  const submit = async () => {
+    if (norek === "" || !bankValue) {
+      Alert.alert("Error", "Mohon isi semua field yang tersedia");
+    }
+    else if (norek.length < 9) {
+      Alert.alert("Error", "Nomor rekening tidak valid")
+    }
+    else {
+      try {
+        setIsSubmitting(true);
+        dataRekening.push({namabank: bankValue.name, norek: norek, logo: bankValue.logo});
+        const docRef = await updateDoc(doc(db, "users", userData.email), {
+          rekening: dataRekening,
+        });
+      }
+      catch(e){
+        console.error("Error adding document: ", e);
+      }
+      finally{
+        setIsSubmitting(false);
+        updateUserDataContext();
+        router.push("/home");
+      }
     }
   };
   return (
@@ -74,7 +69,7 @@ const AddBank = () => {
             value={bankValue}
             items={bankData}
             setOpen={setBankOpen}
-            setValue={setValue}
+            setValue={setBankValue}
             setItems={setBankData}
             placeholder="  Pilih Bank"
             style={{borderWidth: 0, borderRadius: 25, height: 62, backgroundColor: 'white', marginTop: 25}}
@@ -86,53 +81,12 @@ const AddBank = () => {
             zIndex={9999}
             dropDownContainerStyle={{borderWidth: 0, borderRadius: 20, backgroundColor: 'white'}}
           />
-          <DropDownPicker
-            open={cityOpen}
-            value={cityValue}
-            items={cityData}
-            setOpen={setCityOpen}
-            setValue={setCityValue}
-            setItems={setCityData}
-            placeholder="  Pilih Kota"
-            style={{borderWidth: 0, borderRadius: 25, height: 62, backgroundColor: 'white', marginTop: 25}}
-            textStyle={{
-              fontSize: 15,
-              fontFamily: 'Poppins-SemiBold',
-              color: (cityValue ? 'black' : '#D1D1D1'),
-            }}
-            zIndex={9995}
-            dropDownContainerStyle={{borderWidth: 0, borderRadius: 20, backgroundColor: 'white'}}
-          />
           <FormField
-            title="Postal Code"
-            value={form.kodepos}
-            handleChangeText={(e) => setForm({ ...form, kodepos: e })}
+            title="Nomor Rekening"
+            value={norek}
+            handleChangeText={(e) => setNorek(e)}
             otherStyles="mt-7"
-            placeholder="Kode Pos"
-          />
-          <DropDownPicker
-            open={cabangOpen}
-            value={cabangValue}
-            items={cabangData}
-            setOpen={setCabangOpen}
-            setValue={setCabangValue}
-            setItems={setCabangData}
-            placeholder="  Pilih Cabang"
-            style={{borderWidth: 0, borderRadius: 25, height: 62, backgroundColor: 'white', marginTop: 25}}
-            textStyle={{
-              fontSize: 15,
-              fontFamily: 'Poppins-SemiBold',
-              color: (cabangValue ? 'black' : '#D1D1D1'),
-            }}
-            zIndex={9990}
-            dropDownContainerStyle={{borderWidth: 0, borderRadius: 20, backgroundColor: 'white'}}
-          />
-          <FormField
-            title="Card Number"
-            value={form.nomorkartu}
-            handleChangeText={(e) => setForm({ ...form, nomorkartu: e })}
-            otherStyles="mt-7"
-            placeholder="Nomor Kartu"
+            placeholder="Nomor Rekening"
           />
           <CustomButton
             title="Tambah Bank"
