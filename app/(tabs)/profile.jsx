@@ -4,11 +4,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
 import { Image } from "react-native";
 import SearchInput from "../../components/SearchInput";
+import { useUser } from "../hooks/Context";
 
 const profile = () => {
+  const user = useUser();
   return (
     <SafeAreaView className="bg-primary h-full">
-      <FlatList />
+      <Text>{user.namaLengkap}</Text>
     </SafeAreaView>
   );
 };

@@ -23,9 +23,9 @@ const SignIn = () => {
     try {
       await signInWithEmailAndPassword(auth, form.email, form.password);
       const currentUser = await getUser(form.email);
-      setUser(); // panggil update function di context.js
       
       if (currentUser) {
+        setUser(); // panggil update function di context.js
         router.push("/home");
       }
       else {
