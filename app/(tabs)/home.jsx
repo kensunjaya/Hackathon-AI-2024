@@ -1,15 +1,12 @@
-import { View, Text, Image, ImageBackground, FlatList, ScrollView } from "react-native";
+import { View, Text, Image, ImageBackground, FlatList, ScrollView, Alert } from "react-native";
 import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images, icons } from "../../constants";
 import { StatusBar } from "expo-status-bar";
-import { CustomCardHome }  from "../../components/CustomCard";
+import { CustomCardHome, CustomCardRekening }  from "../../components/CustomCard";
 import { router } from "expo-router";
-import useAuth from "../hooks/useAuth";
-import getUser from "../../utility/backend";
 import { useUser, useUserUpdate } from "../hooks/Context";
-import { auth } from "../config/firebase";
-// import { useGlobalContext } from "../hooks/Context";
+import CustomButton from "../../components/CustomButton";
 
 
 const Home = () => {
@@ -17,59 +14,46 @@ const Home = () => {
   console.log("UserDATA", userData);
   // console.log(useAuth().user.email);
   let id = 0;
-  const cardData = [{ // dummy data
-    title: "Bank Fuze",
-    cabang: "Kantor Pusat",
-    logo: images.fuzebank,
-    id: id++,
-  },
-  {
-    title: "Bean Bank",
-    cabang: "KCP Andromeda",
-    logo: images.beanbank,
-    id: id++,
-  },
-  {
-    title: "Seidel Bank",
-    cabang: "KCP Galaxy",
-    logo: images.seidelbank,
-    id: id++,
-  },
-  {
-    title: "",
-    id: id++,
-  }
-]
+  const cardData = userData.rekening
   const namaDepan = userData.namaLengkap.split(" ")[0];
   return (
-    <View>
+    <View className="flex-1">
       <Image
           source={images.img1}
           className="w-full h-[23vh] bg-beige flex flex-end justify-end align-top"
           resizeMode="covern" />
-        <View className="h-full bg-bluesk">
-          <SafeAreaView className="pt-[1rem] relative h-full bg-primary rounded-t-[40px]">
+        <View className="h-full bg-bluesk flex-1">
+          <SafeAreaView className="pt-[1rem] relative h-full bg-primary rounded-t-[40px] px-5 flex-1">
               <Text className="text-2xl text-center font-psemibold">Welcome, {namaDepan}</Text>
-              <Text className="text-xs text-center font-pregular mt-[1vh]">Silakan pilih cabang bank yang ingin Anda tuju</Text>
-              <View className="flex-row mx-5">
+              <Text className="text-xs text-center font-pregular">Silakan pilih rekening anda yang tersedia</Text>
+              <View className="flex-row my-[3vh] flex-1">
                 <FlatList
                   // className="border"
                   data={cardData}
-                  keyExtractor={(item) => {return item.id}}
+                  keyExtractor={(item) => {return item}}
                   renderItem={({ item }) => (
-                    <CustomCardHome 
-                      title={item.title}
-                      subtitle={item.cabang}
+                    <CustomCardRekening
+                      namabank={item.namabank}
+                      norek={item.norek}
                       logo={item.logo}
-                      handlePress={item.title === "" ? () => {router.push('/addbank')} : () => {}}
+                      handlePress={item.namabank === "" ? () => {router.push('/addbank')} : () => {}}
                     />
                   )}
-                  horizontal
+                  vertical
                   showsVerticalScrollIndicator={false}
                   showsHorizontalScrollIndicator={false}
                   // refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
                 />
+                
               </View>
+              <CustomButton 
+                title="Temp Button (addbank)" // nanti button ini akan dipindah ke tab profile
+                handlePress={() => {Alert.alert("Dev Note", "Nanti button addbank ini bakal dipindah ke tab profile"); router.push('/addbank')}}
+                containerStyles="h-5 w-full bg-btn_primary"
+                textStyles="text-white"
+                isLoading={false}
+              />
+              
           </SafeAreaView>
         </View>
         <StatusBar hidden={false} />
