@@ -10,30 +10,27 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { get } from "firebase/database";
+import { UserContext } from "../hooks/Context";
+import getUser from "../../utility/backend";
+import { useUserUpdate } from "../hooks/Context";
 
 const SignIn = () => {
-  const getTest = async () => {
-    try {
-      const docRef = doc(db, "users", form.email)
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        Alert.alert("Welcome", docSnap.data().namaLengkap);
-        router.push('/home');
-      } else {
-        console.log("No such document!");
-      }
-    }
-    catch (e) {
-      console.error("Error getting document:", e);
-    }  
-  }
+  const setUser = useUserUpdate();
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const submit = async () => {
     try {
       await signInWithEmailAndPassword(auth, form.email, form.password);
-      getTest();
+      const currentUser = await getUser(form.email);
+      setUser(); // panggil update function di context.js
+      
+      if (currentUser) {
+        router.push("/home");
+      }
+      else {
+        Alert.alert("Error", "User doesn't exist");
+      }
     }
     catch (err) {
       Alert.alert("Error", "Invalid Credential");

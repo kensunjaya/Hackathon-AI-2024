@@ -38,7 +38,7 @@ const SignUp = () => {
     } else if (form.password !== confirmPassword) {
       Alert.alert("Error", "Password does not match");
     } else {
-      try{
+      try {
           setIsSubmitting(true);
           const docRef = await setDoc(doc(db, "users", form.email),{
             nik: form.nik,

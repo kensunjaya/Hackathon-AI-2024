@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Slot, SplashScreen, Stack } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import React, { useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
+import { UserProvider } from "./hooks/Context";
 
 SplashScreen.preventAutoHideAsync(); // prevent the splash screen from auto hiding
 
@@ -32,18 +32,17 @@ const RootLayout = () => {
     return null;
   }
   return (
+    <UserProvider>
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
-
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="(misc)" options={{ headerShown: false }} />
       
-
       {/* <Stack.Screen name="/search/[query]" options={{ headerShown: false }} /> */}
     </Stack>
-  );
+    </UserProvider>
+  )
 };
 
 export default RootLayout;
