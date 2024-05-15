@@ -12,6 +12,8 @@ import eye from "../assets/icons/eye.png";
 import play from "../assets/icons/play.png";
 import history from "../assets/icons/history.png";
 import ongoing from "../assets/icons/ongoing.png";
+import ellipseProfile from "../assets/icons/EllipseProfile.png";
+import pencil from "../assets/icons/Pencil.png";
 
 export default {
   play,
@@ -28,4 +30,6 @@ export default {
   eye,
   history,
   ongoing,
+  ellipseProfile,
+  pencil,
 };
