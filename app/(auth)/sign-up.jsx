@@ -45,7 +45,8 @@ const SignUp = () => {
             namaLengkap: form.namaLengkap,
             noTelp: form.noTelp,
             email: form.email,
-            noRekening: form.noRekening,
+            noRekening: [form.noRekening],
+            riwayat: [],
           });
       }
       catch(e){

@@ -20,8 +20,9 @@ export function UserProvider({ children }) {
     email: "xyz@gmail.com",
     namaLengkap: "User",
     nik: "0000000000",
-    noRekening: "00000000000",
+    noRekening: ["00000000000"],
     noTelp: "00000000000",
+    riwayat: ["00000000000"],
   });
   const [currentState, setCurrentState] = useState(false);
 
