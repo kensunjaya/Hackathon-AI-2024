@@ -58,7 +58,7 @@ const profile = () => {
         </View>
       </View>
       <InfoBar title="Account" />
-      <TouchableOpacity className="w-full h-16 flex px-5 border border-bluesk" onPress={() => {}}>
+      <TouchableOpacity className="w-full h-16 flex px-5 border border-bluesk" onPress={() => {router.push('/changepassword')}}>
         <View className="flex-row items-center w-full h-full flex">
           <Image
             source={icons.lock}
