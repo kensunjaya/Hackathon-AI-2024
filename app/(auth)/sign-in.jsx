@@ -29,7 +29,8 @@ const SignIn = () => {
         router.push("/home");
       }
       else {
-        Alert.alert("Error", "User doesn't exist");
+        Alert.alert("User not registered", "We're redirecting you to registration page");
+        router.push("/sign-up")
       }
     }
     catch (err) {

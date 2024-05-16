@@ -30,7 +30,7 @@ const Home = () => {
                 <FlatList
                   // className="border"
                   data={cardData}
-                  keyExtractor={(item) => {return item}}
+                  keyExtractor={(item, index) => {return index}}
                   renderItem={({ item }) => (
                     <CustomCardRekening
                       namabank={item.namabank}
@@ -46,13 +46,7 @@ const Home = () => {
                 />
                 
               </View>
-              <CustomButton 
-                title="Temp Button (addbank)" // nanti button ini akan dipindah ke tab profile
-                handlePress={() => {Alert.alert("Dev Note", "Nanti button addbank ini bakal dipindah ke tab profile"); router.push('/addbank')}}
-                containerStyles="h-5 w-full bg-btn_primary"
-                textStyles="text-white"
-                isLoading={false}
-              />
+              
               
           </SafeAreaView>
         </View>

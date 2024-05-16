@@ -28,8 +28,13 @@ export function UserProvider({ children }) {
 
   async function updateUserData() {
     console.log("Auth", auth);
-    const data = await getUser(auth.currentUser.email);
-    setUserData(data);
+    try {
+      const data = await getUser(auth.currentUser.email);
+      setUserData(data);
+    } catch (e) {
+      console.error("Error getting document:", e);
+    }
+    
   }
 
   // const getUser = async (email) => {
