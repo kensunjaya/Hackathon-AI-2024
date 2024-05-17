@@ -10,7 +10,7 @@ import CustomButton from "../../components/CustomButton";
 
 
 const Home = () => {
-  const userData = useUser();
+  const { userData } = useUser();
   console.log("UserDATA", userData);
   // console.log(useAuth().user.email);
   let id = 0;
@@ -36,7 +36,7 @@ const Home = () => {
                       namabank={item.namabank}
                       norek={item.norek}
                       logo={item.logo}
-                      handlePress={item.namabank === "" ? () => {router.push('/addbank')} : () => {}}
+                      handlePress={() => {router.push('/addbank')}}
                     />
                   )}
                   vertical

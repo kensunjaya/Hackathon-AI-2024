@@ -12,7 +12,7 @@ import { db } from "../config/firebase";
 import { useUser, useUserUpdate } from "../hooks/Context";
 
 const AddBank = () => {
-  const userData = useUser();
+  const { userData } = useUser();
   const updateUserDataContext = useUserUpdate();
   const dataRekening = userData.rekening;
   

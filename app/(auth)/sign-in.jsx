@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView, ImageBackground, Alert, TouchableWithoutFeedback } from "react-native";
+import { View, Text, Image, ScrollView, Alert, TouchableWithoutFeedback } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
@@ -10,22 +10,22 @@ import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/aut
 import { app, auth, db } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { get } from "firebase/database";
-import getUser from "../../utility/backend";
+import { getUser, getBank } from "../../utility/backend";
 import { useUserUpdate } from "../hooks/Context";
 
 
 const SignIn = () => {
-  const setUser = useUserUpdate();
+  const { updateUserData } = useUserUpdate();
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const forgotPassword = () => {
-    console.log("forgot password clicked");
-    sendPasswordResetEmail(auth, form.email, null)
-      .then(() => {Alert.alert("Email terkirim", "Mohon cek email anda untuk reset password")})
-      .catch((err) => {console.error(err); Alert.alert("Error", err.message)});
-    console.log("done");
+  const forgotPassword = async () => {
+    const bankdata = await getBank();
+    console.log(bankdata);
+    // sendPasswordResetEmail(auth, form.email, null)
+    //   .then(() => {Alert.alert("Email terkirim", "Silakan cek email Anda untuk reset password")})
+    //   .catch((err) => {console.error(err); Alert.alert("Error", err.message)});
   }
 
   const submit = async () => {
@@ -34,7 +34,7 @@ const SignIn = () => {
       const currentUser = await getUser(form.email);
       
       if (currentUser) {
-        setUser(); // panggil update function di context.js
+        updateUserData(); // panggil update function di context.js
         router.push("/home");
       }
       else {

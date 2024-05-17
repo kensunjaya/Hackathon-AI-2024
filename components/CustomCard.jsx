@@ -73,7 +73,7 @@ const CustomCardHistory = (props) => {
 
 const CustomCardRekening = (props) => {
   return (
-    <View className="bg-white rounded-[20px] mb-[3vh] flex p-5">
+    <TouchableOpacity className="bg-white rounded-[20px] mb-[3vh] flex p-5" onPress={props.handlePress} activeOpacity={0.7}>
       <View className="items-end flex-row">
         <View>
           <Text className="font-psemibold text-gray-200 text-sm mb-3">Rekening {props.namabank}</Text>
@@ -87,7 +87,7 @@ const CustomCardRekening = (props) => {
         />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

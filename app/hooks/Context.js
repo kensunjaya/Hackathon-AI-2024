@@ -2,7 +2,7 @@ import { doc, getDoc } from "firebase/firestore";
 import React, { useState, useContext, useEffect } from "react";
 import { auth } from '../config/firebase';
 import { db } from "../config/firebase";
-import getUser from "../../utility/backend";
+import { getBank, getUser } from "../../utility/backend";
 
 const UserContext = React.createContext();
 const UserUpdateContext = React.createContext();
@@ -25,7 +25,23 @@ export function UserProvider({ children }) {
     password: "default",
     riwayat: [],
   });
-  const [currentState, setCurrentState] = useState(false);
+  const [bankData, setBankData] = useState([{
+    label: "Null",
+    value: {name: "Null", logo: null},
+  }]);
+
+  useEffect(() => {
+    const fetchBankData = async () => {
+      try {
+        const data = await getBank(); 
+        setBankData(data); 
+        return bankData;
+      } catch (e) {
+        console.error("Error getting bank data:", e);
+      }
+    };
+    fetchBankData();
+  }, []);
 
   async function updateUserData() {
     console.log("Auth", auth);
@@ -35,7 +51,6 @@ export function UserProvider({ children }) {
     } catch (e) {
       console.error("Error getting document:", e);
     }
-    
   }
 
   // const getUser = async (email) => {
@@ -65,8 +80,8 @@ export function UserProvider({ children }) {
 
   
   return (    
-    <UserContext.Provider value={userData}>
-      <UserUpdateContext.Provider value={updateUserData}>
+    <UserContext.Provider value={{userData, bankData}}>
+      <UserUpdateContext.Provider value={{updateUserData}}>
         {children}
       </UserUpdateContext.Provider>
     </UserContext.Provider>

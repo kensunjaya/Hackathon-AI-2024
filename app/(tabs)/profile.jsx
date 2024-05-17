@@ -20,7 +20,7 @@ import { auth } from "../config/firebase";
 import CustomButton from "../../components/CustomButton";
 
 const profile = () => {
-  const user = useUser();
+  const { userData } = useUser();
   const logout = async () => {
     try {
       await signOut(auth);
@@ -49,9 +49,9 @@ const profile = () => {
                 resizeMode="contain"
               />
               <View className="pl-5 justify-center">
-                <Text className="font-psemibold text-xl">{user.namaLengkap}</Text>
-                <Text className="font-pregular text-sm text-gray-500">{user.noTelp}</Text>
-                <Text className="font-pregular text-sm text-gray-500">{user.email}</Text>
+                <Text className="font-psemibold text-xl">{userData.namaLengkap}</Text>
+                <Text className="font-pregular text-sm text-gray-500">{userData.noTelp}</Text>
+                <Text className="font-pregular text-sm text-gray-500">{userData.email}</Text>
               </View>
             </View>
           </TouchableOpacity>
