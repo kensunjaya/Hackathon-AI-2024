@@ -13,16 +13,13 @@ import { db, collection, addDoc } from '../config/firebase';
 import { getDoc, getFirestore } from "firebase/firestore";
 import {doc, setDoc} from "firebase/firestore";
 import DropDownPicker from "react-native-dropdown-picker";
+import { bankData, useUser } from "../hooks/Context";
 
 const SignUp = () => {
+  const { bankData } = useUser();
   const [bankOpen, setBankOpen] = useState(false);
   const [bankValue, setBankValue] = useState(null);
-  const [bankData, setBankData] = useState([
-    { label: '  Seidel Bank', value: { name: 'Seidel', logo: "https://imgur.com/gt1wbcv.png" } },
-    { label: '  Fuze Bank', value: { name: 'Fuze', logo: "https://imgur.com/xq94KtM.png" } },
-    { label: '  Bean Bank', value: { name: 'Bean', logo: "https://imgur.com/Qyb3EVr.png" } },
-    { label: '  Andro Bank', value: { name : 'Andro', logo: "https://imgur.com/bPZFRKh.png" } },
-  ]);
+  const [bankFormData, setBankFormData] = useState(bankData);
   
   const [form, setForm] = useState({
     nik: "",
@@ -124,10 +121,10 @@ const SignUp = () => {
           <DropDownPicker
             open={bankOpen}
             value={bankValue}
-            items={bankData}
+            items={bankFormData}
             setOpen={setBankOpen}
             setValue={setBankValue}
-            setItems={setBankData}
+            setItems={setBankFormData}
             placeholder="  Pilih Bank"
             style={{borderWidth: 0, borderRadius: 25, height: 62, backgroundColor: 'white', marginTop: 25}}
             textStyle={{

@@ -12,7 +12,7 @@ import { db } from "../config/firebase";
 import { useUser, useUserUpdate } from "../hooks/Context";
 
 const AddBank = () => {
-  const { userData } = useUser();
+  const { userData, bankData } = useUser();
   const updateUserDataContext = useUserUpdate();
   const dataRekening = userData.rekening;
   
@@ -21,12 +21,7 @@ const AddBank = () => {
 
   const [norek, setNorek] = useState("");
 
-  const [bankData, setBankData] = useState([
-    { label: '  Seidel Bank', value: { name: 'Seidel', logo: "https://imgur.com/gt1wbcv.png" } },
-    { label: '  Fuze Bank', value: { name: 'Fuze', logo: "https://imgur.com/xq94KtM.png" } },
-    { label: '  Bean Bank', value: { name: 'Bean', logo: "https://imgur.com/Qyb3EVr.png" } },
-    { label: '  Andro Bank', value: { name : 'Andro', logo: "https://imgur.com/bPZFRKh.png" } },
-  ]);
+  const [bankFormData, setBankFormData] = useState(bankData);
   
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -67,10 +62,10 @@ const AddBank = () => {
           <DropDownPicker
             open={bankOpen}
             value={bankValue}
-            items={bankData}
+            items={bankFormData}
             setOpen={setBankOpen}
             setValue={setBankValue}
-            setItems={setBankData}
+            setItems={setBankFormData}
             placeholder="  Pilih Bank"
             style={{borderWidth: 0, borderRadius: 25, height: 62, backgroundColor: 'white', marginTop: 25}}
             textStyle={{
