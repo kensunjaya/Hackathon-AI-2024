@@ -21,11 +21,9 @@ const SignIn = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const forgotPassword = async () => {
-    const bankdata = await getBank();
-    console.log(bankdata);
-    // sendPasswordResetEmail(auth, form.email, null)
-    //   .then(() => {Alert.alert("Email terkirim", "Silakan cek email Anda untuk reset password")})
-    //   .catch((err) => {console.error(err); Alert.alert("Error", err.message)});
+    sendPasswordResetEmail(auth, form.email, null)
+      .then(() => {Alert.alert("Email terkirim", "Silakan cek email Anda untuk reset password")})
+      .catch((err) => {console.error(err); Alert.alert("Error", err.message)});
   }
 
   const submit = async () => {

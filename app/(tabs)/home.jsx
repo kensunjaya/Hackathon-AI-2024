@@ -36,7 +36,7 @@ const Home = () => {
                       namabank={item.namabank}
                       norek={item.norek}
                       logo={item.logo}
-                      handlePress={() => {router.push('/addbank')}}
+                      handlePress={() => {router.push('/problem')}}
                     />
                   )}
                   vertical
