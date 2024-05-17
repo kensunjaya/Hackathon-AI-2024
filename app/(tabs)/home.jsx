@@ -12,8 +12,6 @@ import CustomButton from "../../components/CustomButton";
 const Home = () => {
   const { userData } = useUser();
   console.log("UserDATA", userData);
-  // console.log(useAuth().user.email);
-  let id = 0;
   const cardData = userData.rekening
   const namaDepan = userData.namaLengkap.split(" ")[0];
   return (

@@ -13,7 +13,7 @@ import { useUser, useUserUpdate } from "../hooks/Context";
 
 const AddBank = () => {
   const { userData, bankData } = useUser();
-  const updateUserDataContext = useUserUpdate();
+  const { updateUserData } = useUserUpdate();
   const dataRekening = userData.rekening;
   
   const [bankOpen, setBankOpen] = useState(false);
@@ -45,7 +45,7 @@ const AddBank = () => {
       }
       finally{
         setIsSubmitting(false);
-        updateUserDataContext();
+        updateUserData();
         router.push("/home");
       }
     }

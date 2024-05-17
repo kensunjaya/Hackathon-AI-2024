@@ -52,32 +52,6 @@ export function UserProvider({ children }) {
       console.error("Error getting document:", e);
     }
   }
-
-  // const getUser = async (email) => {
-  //   try {
-  //     const docRef = doc(db, "users", email)
-  //     const docSnap = await getDoc(docRef);
-  //     if (docSnap.exists()) {
-  //       // setUserData(docSnap.data());
-  //       return docSnap.data();
-  //     } else {
-  //       console.log("No such document!");
-  //       return null;
-  //     }
-  //   }
-  //   catch (e) {
-  //     console.error("Error getting document:", e);
-  //     return null;
-  //   }  
-  // }
-
-  // useEffect(() => {
-    
-  //   // Clean up the subscription on unmount
-  // }, []);
-
-  
-
   
   return (    
     <UserContext.Provider value={{userData, bankData}}>
