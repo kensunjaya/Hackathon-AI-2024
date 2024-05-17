@@ -3,8 +3,8 @@ import React from "react";
 
 const InfoBar = (props) => {
   return (
-    <View className="w-[430px] h-[36px] bg-bluesk">
-      <Text className="text-white font-pregular ml-10 mt-1.5">
+    <View className="w-full h-fit bg-bluesk">
+      <Text className="text-white font-pregular ml-10 my-1.5">
         {props.title}
       </Text>
     </View>

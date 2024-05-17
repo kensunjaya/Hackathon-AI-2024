@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Alert } from "react-native";
+import { View, Text, ScrollView, Alert, KeyboardAvoidingView } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Image } from "react-native";
 import { images } from "../../constants";

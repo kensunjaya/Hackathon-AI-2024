@@ -22,6 +22,7 @@ export function UserProvider({ children }) {
     nik: "0000000000",
     noRekening: ["00000000000"],
     noTelp: "00000000000",
+    password: "default",
     riwayat: [],
   });
   const [currentState, setCurrentState] = useState(false);

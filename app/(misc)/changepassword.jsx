@@ -11,6 +11,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
 import { useUser, useUserUpdate } from "../hooks/Context";
 import { updatePassword } from "firebase/auth";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const AddBank = () => {
   const userData = useUser();
@@ -47,8 +48,8 @@ const AddBank = () => {
     }
   };
   return (
-    <View className="flex-1">
-      <View className="h-full bg-beige flex-1">
+    <SafeAreaView className="flex-1 bg-primary">
+      <View className="h-full bg-beige flex-1 mt-5">
         <View className="bg-primary h-full w-full px-4 flex-1">
           <FormField
             title="Old Password"
@@ -74,7 +75,7 @@ const AddBank = () => {
         </View>
       </View>
       <StatusBar hidden={false} />
-    </View>
+    </SafeAreaView>
   );
 };
 

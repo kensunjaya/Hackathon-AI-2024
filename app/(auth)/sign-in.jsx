@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView, ImageBackground, Alert } from "react-native";
+import { View, Text, Image, ScrollView, ImageBackground, Alert, TouchableWithoutFeedback } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
@@ -6,19 +6,28 @@ import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../config/firebase";
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { app, auth, db } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { get } from "firebase/database";
-import { UserContext } from "../hooks/Context";
 import getUser from "../../utility/backend";
 import { useUserUpdate } from "../hooks/Context";
+
 
 const SignIn = () => {
   const setUser = useUserUpdate();
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const forgotPassword = () => {
+    console.log("forgot password clicked");
+    sendPasswordResetEmail(auth, form.email, null)
+      .then(() => {Alert.alert("Email terkirim", "Mohon cek email anda untuk reset password")})
+      .catch((err) => {console.error(err); Alert.alert("Error", err.message)});
+    console.log("done");
+  }
+
   const submit = async () => {
     try {
       await signInWithEmailAndPassword(auth, form.email, form.password);
@@ -35,7 +44,7 @@ const SignIn = () => {
     }
     catch (err) {
       Alert.alert("Error", "Invalid Credential");
-      console.log(err.message);
+      console.log(err);
     }
   };
 
@@ -60,12 +69,20 @@ const SignIn = () => {
                 placeholder="email"
               />
               <FormField
-                title="Password"
+                title="Kata Sandi"
                 value={form.password}
                 handleChangeText={(e) => setForm({ ...form, password: e })}
                 placeholder="password"
                 otherStyles="mt-7"
               />
+              <View className="flex-row justify-end pt-5">
+                  <Text className="text-black font-pregular text-[14px]">
+                    Lupa Password?
+                  </Text>
+                  <TouchableWithoutFeedback onPress={forgotPassword}>
+                    <Text className="pl-2 font-psemibold text-btn_primary text-[14px]">Reset Password</Text>
+                  </TouchableWithoutFeedback>
+                </View>
               <CustomButton
                 title="Login"
                 handlePress={submit}
@@ -73,16 +90,19 @@ const SignIn = () => {
                 textStyles="text-white"
                 isLoading={isSubmitting}
               />
-              <View className="justify-center pt-5 flex-row gap-2">
-                <Text className="text-black font-pregular text-[14px]">
-                  Don't have account?
-                </Text>
-                <Link
-                  href="/sign-up"
-                  className="font-psemibold text-btn_primary text-[14px]"
-                >
-                  Register here
-                </Link>
+              <View className="justify-center items-center pt-5">
+                <View className="flex-row gap-2">
+                  <Text className="text-black font-pregular text-[14px]">
+                    Belum punya akun?
+                  </Text>
+                  <Link
+                    href="/sign-up"
+                    className="font-psemibold text-btn_primary text-[14px]"
+                  >
+                    Registrasi di sini
+                  </Link>
+                </View>
+                
               </View>
             </View>
           </ScrollView>
