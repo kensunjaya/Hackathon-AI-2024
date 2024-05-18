@@ -7,17 +7,20 @@ import { icons } from "../../constants";
 import { router } from "expo-router";
 import InfoBar from "../../components/InfoBar";
 import FilledFormField from "../../components/FilledFormField";
-import { useUser } from "../hooks/Context";
+import { useUser, useUserUpdate } from "../hooks/Context";
 import CustomButton from "../../components/CustomButton";
 import { getDatabase, ref, child, push, update } from "firebase/database";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 const editProfile = () => {
   const { userData } = useUser();
+  const { updateUserData } = useUserUpdate();
   const [form, setForm] = useState({
     nik: userData.nik,
     namaLengkap: userData.namaLengkap,
     noTelp: userData.noTelp,
-    email: userData.email,
+    // email: userData.email,
   });
 
   const backButton = () => {
@@ -29,18 +32,36 @@ const editProfile = () => {
   };
 
   const saveChanges = async () => {
-    // Langsung simpan ke database
     try {
-      const db = getDatabase();
-      const update = {};
-      update[`/users/${userData.email}`] = form;
-      await update(ref(db), update);
-      Alert.alert("Success", "Profile Updated Successfully");
-      router.push("/profile");
-    } catch (e) {
-      console.log(e);
-      Alert.alert("Error", "Failed to update profile");
+      await updateDoc(doc(db, "users", userData.email), {
+        nik: form.nik,
+        namaLengkap: form.namaLengkap,
+        noTelp: form.noTelp,
+      }).then(() => {
+        updateUserData();
+        Alert.alert("Success", "Profile berhasil diubah");
+        router.push("/profile");
+      });
     }
+    catch(e) {
+      console.error("Failed to update profile: ", e);
+      Alert.alert("Error", "Terjadi error saat menyimpan perubahan profil");
+    }
+    finally {
+      updateUserDataContext();
+    }
+    // Langsung simpan ke database
+    // try {
+    //   const db = getDatabase();
+    //   const update = {};
+    //   update[`/users/${userData.email}`] = form;
+    //   await update(ref(db), update);
+    //   Alert.alert("Success", "Profile Updated Successfully");
+    //   router.push("/profile");
+    // } catch (e) {
+    //   console.log(e);
+    //   Alert.alert("Error", "Failed to update profile");
+    // }
   };
 
   return (
@@ -71,14 +92,14 @@ const editProfile = () => {
       <View>
         <ScrollView>
           <View className="w-full justify-center px-4">
-            <FilledFormField
+            {/* <FilledFormField
               title="Email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e })}
               otherStyles="mt-7"
               keyboardType="email-address"
               placeholder="Email"
-            />
+            /> */}
             <FilledFormField
               title="Nama Lengkap"
               value={form.namaLengkap}
