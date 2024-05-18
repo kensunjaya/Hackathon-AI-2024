@@ -42,13 +42,9 @@ const editProfile = () => {
         Alert.alert("Success", "Profile berhasil diubah");
         router.push("/profile");
       });
-    }
-    catch(e) {
+    } catch (e) {
       console.error("Failed to update profile: ", e);
       Alert.alert("Error", "Terjadi error saat menyimpan perubahan profil");
-    }
-    finally {
-      updateUserDataContext();
     }
     // Langsung simpan ke database
     // try {
