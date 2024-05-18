@@ -11,11 +11,11 @@ const Inbox = () => {
   const data = userData.inbox;
   return (
     <SafeAreaView className="bg-primary h-full flex-1">
-      <View className="flex-row items-center justify-center p-5">
-        <Text className="text-black font-bold text-3xl">Inbox</Text>
+      <View className="flex-row items-center justify-center p-5 pt-10">
+        <Text className="text-gray-800 text-3xl font-psemibold">Inbox</Text>
       </View>
       <View className="flex-1 mx-5">
-        <View className="flex-row my-[3vh] flex-1">
+        <View className="flex-row flex-1">
           <FlatList
             data={data}
             keyExtractor={(item) => item.id}

@@ -132,14 +132,16 @@ const CustomCardInbox = (props) => {
       activeOpacity={0.7}
     >
       <View className="items-end flex-row">
-        <View>
-          <Text className="font-psemibold text-gray-200 text-lg mb-3">
-            Rekening {props.bank}
-          </Text>
-          <Text className="text-gray-200 text-sm font-psemibold">
-            {props.norek}
-          </Text>
-          <Text className="text-gray-200 text-sm font-psemibold">
+        <View className="w-full">
+          <View className="flex-row">
+            <Text className="font-psemibold text-gray-200 text-sm mb-3">
+              Rekening {props.bank}
+            </Text>
+            <Text className="text-gray-200 text-sm font-pregular ml-auto">
+              {props.norek}
+            </Text>
+          </View>
+          <Text className="text-gray-200 text-sm font-pregular">
             {props.title}
           </Text>
         </View>

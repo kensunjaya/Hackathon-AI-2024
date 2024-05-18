@@ -21,7 +21,6 @@ const SendProblemResponse = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const submit = async () => {
-    
     if (message === "") {
       Alert.alert("Error", "Mohon cantumkan pesan");
     }
@@ -36,6 +35,7 @@ const SendProblemResponse = () => {
         const docRef = await updateDoc(doc(db, "users", selectedProblem.email), {
           inbox: userdata.inbox,
         });
+        Alert.alert("Success", "Pesan berhasil dikirim ke inbox nasabah")
       }
       catch(e) {
         console.error("Error adding document: ", e);
