@@ -9,6 +9,7 @@ import InfoBar from "../../components/InfoBar";
 import FilledFormField from "../../components/FilledFormField";
 import { useUser } from "../hooks/Context";
 import CustomButton from "../../components/CustomButton";
+import { getDatabase, ref, child, push, update } from "firebase/database";
 
 const editProfile = () => {
   const { userData } = useUser();
@@ -27,8 +28,19 @@ const editProfile = () => {
     }
   };
 
-  const saveChanges = () => {
+  const saveChanges = async () => {
     // Langsung simpan ke database
+    try {
+      const db = getDatabase();
+      const update = {};
+      update[`/users/${userData.email}`] = form;
+      await update(ref(db), update);
+      Alert.alert("Success", "Profile Updated Successfully");
+      router.push("/profile");
+    } catch (e) {
+      console.log(e);
+      Alert.alert("Error", "Failed to update profile");
+    }
   };
 
   return (
