@@ -1,8 +1,9 @@
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Image } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useUser } from "../hooks/Context";
 import { CustomCardInbox } from "../../components/CustomCard";
+import { icons } from "../../constants";
 
 const Inbox = () => {
   const { userData } = useUser();
@@ -25,6 +26,18 @@ const Inbox = () => {
                 norek={item.norek}
                 title={item.title}
               />
+            )}
+            ListEmptyComponent={() => (
+              <View className="justify-center items-center mx-auto my-auto">
+                <Text className="text-btn_primary font-pbold text-lg text-center">
+                  Inbox is Empty {":("}
+                </Text>
+                <Image
+                  className=" w-43 h-43"
+                  resizeMode="contain"
+                  source={icons.EmptyInbox}
+                />
+              </View>
             )}
           />
         </View>
