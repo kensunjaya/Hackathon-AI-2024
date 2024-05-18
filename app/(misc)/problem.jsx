@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const data = [
-  { label: 'Item 1', value: '1' },
+const data1 = [
+  { label: 'Masalah dengan kartu ATM', value: 'ATM'},
   { label: 'Item 2', value: '2' },
   { label: 'Item 3', value: '3' },
   { label: 'Item 4', value: '4' },
@@ -14,17 +14,30 @@ const data = [
   { label: 'Item 8', value: '8' },
 ];
 
-const DropdownComponent = () => {
-  const [value, setValue] = useState(null);
+const subdata1 = {
+  ATM : [
+    { label: 'Kartu ATM hilang', value: 'ATM1' },
+    { label: 'Kartu ATM rusak', value: 'ATM2' },
+    { label: 'Kartu ATM terblokir', value: 'ATM3' },
+    { label: 'Kartu ATM tertelan mesin ATM', value: 'ATM4' },
+  ],
 
-  const renderItem = item => {
-    return (
-      <View style={styles.item}>
-        <Text style={styles.textItem}>{item.label}</Text>
-        {item.value === value}
-      </View>
-    );
-  };
+};
+
+const subdata2 = {
+  ATM1 : [
+    { label: 'a', value: '5' },
+    { label: 'b', value: '6' },
+    { label: 'c', value: '7' },
+    { label: 'd', value: '8' },
+  ],
+
+};
+
+const DropdownComponent = () => {
+  const [selectedValue1, setSelectedValue1] = useState(null);
+  const [selectedValue2, setSelectedValue2] = useState(null);
+  const [selectedValue3, setSelectedValue3] = useState(null);
 
   return (
     <SafeAreaView className="h-full bg-primary flex-1 pt-5">
@@ -34,16 +47,55 @@ const DropdownComponent = () => {
       selectedTextStyle={styles.selectedTextStyle}
       inputSearchStyle={styles.inputSearchStyle}
       iconStyle={styles.iconStyle}
-      data={data}
+      data={data1}
       search
       maxHeight={300}
       labelField="label"
       valueField="value"
       placeholder="Pilih permasalahan"
       searchPlaceholder="Search..."
-      value={value}
+      value={selectedValue1}
       onChange={item => {
-        setValue(item.value);
+        setSelectedValue1(item.value);
+        setSelectedValue2(null); // Reset the second dropdown
+        setSelectedValue3(null); // Reset the third dropdown
+      }}
+    />
+    <Dropdown
+      style={styles.dropdown}
+      placeholderStyle={styles.placeholderStyle}
+      selectedTextStyle={styles.selectedTextStyle}
+      inputSearchStyle={styles.inputSearchStyle}
+      iconStyle={styles.iconStyle}
+      data={subdata1[selectedValue1] || []}
+      search
+      maxHeight={300}
+      labelField="label"
+      valueField="value"
+      placeholder="Pilih permasalahan"
+      searchPlaceholder="Search..."
+      value={selectedValue2}
+      onChange={item => {
+        setSelectedValue2(item.value);
+        setSelectedValue3(null); // Reset the third dropdown
+      }}
+    />
+    <Dropdown
+      style={styles.dropdown}
+      placeholderStyle={styles.placeholderStyle}
+      selectedTextStyle={styles.selectedTextStyle}
+      inputSearchStyle={styles.inputSearchStyle}
+      iconStyle={styles.iconStyle}
+      data={subdata2[selectedValue2] || []}
+      search
+      maxHeight={300}
+      labelField="label"
+      valueField="value"
+      placeholder="Pilih permasalahan"
+      searchPlaceholder="Search..."
+      value={selectedValue3}
+      onChange={item => {
+        setSelectedValue3(item.value);
       }}
     />
     </SafeAreaView>
