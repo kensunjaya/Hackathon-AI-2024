@@ -15,6 +15,7 @@ import ongoing from "../assets/icons/ongoing.png";
 import ellipseProfile from "../assets/icons/EllipseProfile.png";
 import pencil from "../assets/icons/Pencil.png";
 import lock from "../assets/icons/lock.png";
+import backButton from "../assets/icons/BackButton.png";
 
 export default {
   play,
@@ -34,4 +35,5 @@ export default {
   ellipseProfile,
   pencil,
   lock,
+  backButton,
 };

@@ -10,6 +10,7 @@ const MiscLayout = () => {
         <Stack.Screen name="addbank" options={{ headerShown: false }} />
         <Stack.Screen name="changepassword" options={{ headerShown: false }} />
         <Stack.Screen name="problem" options={{ headerShown: false }} />
+        <Stack.Screen name="editProfile" options={{ headerShown: false }} />
       </Stack>
       <StatusBar backgroundColor="rgba(238, 245, 255, 1)" style="dark" />
     </>
