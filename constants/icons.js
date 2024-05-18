@@ -17,6 +17,7 @@ import pencil from "../assets/icons/Pencil.png";
 import lock from "../assets/icons/lock.png";
 import backButton from "../assets/icons/BackButton.png";
 import inbox from "../assets/icons/inbox.png";
+import EmptyInbox from "../assets/icons/EmptyInbox.png";
 
 export default {
   play,
@@ -38,4 +39,5 @@ export default {
   lock,
   backButton,
   inbox,
+  EmptyInbox,
 };

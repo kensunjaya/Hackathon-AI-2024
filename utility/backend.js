@@ -1,12 +1,12 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import {auth, db} from "../app/config/firebase";
+import { auth, db } from "../app/config/firebase";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { get } from "firebase/database";
 import { Alert } from "react-native";
 
 const getUser = async (email) => {
   try {
-    const docRef = doc(db, "users", email)
+    const docRef = doc(db, "users", email);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       return docSnap.data();
@@ -14,12 +14,11 @@ const getUser = async (email) => {
       console.log("Data does not exist in database!");
       return null;
     }
-  }
-  catch (e) {
+  } catch (e) {
     console.error("Error getting document:", e);
     return null;
-  }  
-}
+  }
+};
 
 const getBank = async () => {
   try {
@@ -27,7 +26,10 @@ const getBank = async () => {
     const collectionRef = collection(db, 'banks')
     const snapshot = await getDocs(collectionRef);
     snapshot.docs.forEach((doc) => {
-      banks.push({ label: doc.id, value: { name: doc.data().name, logo: doc.data().logo } });
+      banks.push({
+        label: doc.id,
+        value: { name: doc.data().name, logo: doc.data().logo },
+      });
     });
 
     return banks;
