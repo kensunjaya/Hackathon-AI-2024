@@ -47,9 +47,6 @@ const editProfile = () => {
       console.error("Failed to update profile: ", e);
       Alert.alert("Error", "Terjadi error saat menyimpan perubahan profil");
     }
-    finally {
-      updateUserDataContext();
-    }
     // Langsung simpan ke database
     // try {
     //   const db = getDatabase();
