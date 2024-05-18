@@ -55,6 +55,7 @@ const SignUp = () => {
             namaLengkap: form.namaLengkap,
             noTelp: form.noTelp,
             email: form.email,
+            inbox: [],
             password: form.password,
             rekening: [{namabank : bankValue.name, norek: form.noRekening, logo: bankValue.logo }], // at least 1 rekening didaftarkan saat registrasi
             riwayat: [],

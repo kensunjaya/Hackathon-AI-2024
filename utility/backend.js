@@ -24,17 +24,12 @@ const getUser = async (email) => {
 const getBank = async () => {
   try {
     const banks = [];
-    console.log("processing")
-    // const docRef = doc(db, "banks");
     const collectionRef = collection(db, 'banks')
     const snapshot = await getDocs(collectionRef);
-    
-    // Process the documents in the snapshot
     snapshot.docs.forEach((doc) => {
       banks.push({ label: doc.id, value: { name: doc.data().name, logo: doc.data().logo } });
     });
-    
-    // Return the banks array after it is fully populated
+
     return banks;
   } catch (e) {
     console.error("Error getting document:", e);
@@ -42,4 +37,19 @@ const getBank = async () => {
   }
 };
 
-export {getUser, getBank};
+const getProblem = async() => {
+  try {
+    const problems = [];
+    const collectionRef = collection(db, 'problems')
+    const snapshot = await getDocs(collectionRef);
+    snapshot.docs.forEach((doc) => {
+      problems.push(doc.data());
+    });
+    return problems;
+  } catch (e) {
+    console.error("Error getting document:", e);
+    return null;
+  }
+};
+
+export {getUser, getBank, getProblem};

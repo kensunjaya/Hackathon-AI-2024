@@ -14,8 +14,8 @@ import { updatePassword } from "firebase/auth";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const AddBank = () => {
-  const userData = useUser();
-  const updateUserDataContext = useUserUpdate();
+  const { userData } = useUser();
+  const { updateUserData } = useUserUpdate();
   
   const [newPassword, setNewPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
@@ -43,7 +43,7 @@ const AddBank = () => {
       }
       finally {
         setIsSubmitting(false);
-        updateUserDataContext();
+        updateUserData();
       }
     }
   };

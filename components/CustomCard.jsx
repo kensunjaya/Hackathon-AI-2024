@@ -91,4 +91,22 @@ const CustomCardRekening = (props) => {
   )
 }
 
-export { CustomCardHome, CustomCardHistory, CustomCardRekening }
+const CustomCardTeller = (props) => {
+  return (
+    <TouchableOpacity className="bg-white rounded-[20px] mb-[3vh] flex p-5" onPress={props.handlePress} activeOpacity={0.7}>
+      <View className="items-end flex-row">
+        <View className="w-full">
+          <Text className="font-psemibold text-gray-200 text-sm">{props.email}</Text>
+          <Text className="text-gray-200 text-xl my-1">{props.description}</Text>
+          <View className="flex-row w-full">
+            <Text className="text-gray-200 text-sm">Bank {props.bank}</Text>
+            <Text className="text-gray-200 text-sm ml-auto">Norek: {props.norek}</Text>
+          </View>
+        </View>
+      </View>
+    </TouchableOpacity>
+  )
+}
+
+
+export { CustomCardHome, CustomCardHistory, CustomCardRekening, CustomCardTeller }

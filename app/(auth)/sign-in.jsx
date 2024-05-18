@@ -15,7 +15,7 @@ import { useUserUpdate } from "../hooks/Context";
 
 
 const SignIn = () => {
-  const { updateUserData } = useUserUpdate();
+  const { updateUserData, updateProblemData } = useUserUpdate();
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,22 +27,28 @@ const SignIn = () => {
   }
 
   const submit = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, form.email, form.password);
-      const currentUser = await getUser(form.email);
-      
-      if (currentUser) {
-        updateUserData(); // panggil update function di context.js
-        router.push("/home");
-      }
-      else {
-        Alert.alert("User not registered", "We're redirecting you to registration page");
-        router.push("/sign-up")
-      }
+    if (form.email === "teller@cisuga.baits.id" && form.password === "teller123") {
+      updateProblemData();
+      router.push("/tellerpage");
     }
-    catch (err) {
-      Alert.alert("Error", "Invalid Credential");
-      console.log(err);
+    else {
+      try {
+        await signInWithEmailAndPassword(auth, form.email, form.password);
+        const currentUser = await getUser(form.email);
+        
+        if (currentUser) {
+          updateUserData(); // panggil update function di context.js
+          router.push("/home");
+        }
+        else {
+          Alert.alert("User not registered", "We're redirecting you to registration page");
+          router.push("/sign-up")
+        }
+      }
+      catch (err) {
+        Alert.alert("Error", "Invalid Credential");
+        console.log(err);
+      }
     }
   };
 

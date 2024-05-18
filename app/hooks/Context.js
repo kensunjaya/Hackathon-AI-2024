@@ -2,7 +2,7 @@ import { doc, getDoc } from "firebase/firestore";
 import React, { useState, useContext, useEffect } from "react";
 import { auth } from '../config/firebase';
 import { db } from "../config/firebase";
-import { getBank, getUser } from "../../utility/backend";
+import { getBank, getProblem, getUser } from "../../utility/backend";
 
 const UserContext = React.createContext();
 const UserUpdateContext = React.createContext();
@@ -24,11 +24,14 @@ export function UserProvider({ children }) {
     noTelp: "00000000000",
     password: "default",
     riwayat: [],
+    inbox: [],
   });
   const [bankData, setBankData] = useState([{
     label: "Null",
     value: {name: "Null", logo: null},
   }]);
+  const [problemData, setProblemData] = useState([])
+  const [selectedProblem, setSelectedProblem] = useState({})
 
   useEffect(() => {
     const fetchBankData = async () => {
@@ -52,10 +55,24 @@ export function UserProvider({ children }) {
       console.error("Error getting document:", e);
     }
   }
+
+  async function updateProblemData() {
+    try {
+      const data = await getProblem();
+      setProblemData(data);
+    }
+    catch (e) {
+      Alert.alert("Error", e.message);
+    }
+  }
+
+  function updateSelectedProblem(problem) {
+    setSelectedProblem(problem);
+  }
   
   return (    
-    <UserContext.Provider value={{userData, bankData}}>
-      <UserUpdateContext.Provider value={{updateUserData}}>
+    <UserContext.Provider value={{ userData, bankData, problemData, selectedProblem }}>
+      <UserUpdateContext.Provider value={{ updateUserData, updateProblemData, updateSelectedProblem }}>
         {children}
       </UserUpdateContext.Provider>
     </UserContext.Provider>
