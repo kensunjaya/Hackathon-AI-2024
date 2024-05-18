@@ -96,15 +96,15 @@ const TabsLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="ongoing"
+          name="inbox"
           options={{
-            title: "ongoing",
+            title: "inbox",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.ongoing}
+                icon={icons.inbox}
                 color={color}
-                name="Ongoing"
+                name="Inbox"
                 focused={focused}
               />
             ),
