@@ -13,7 +13,7 @@ const FilledFormField = (props) => {
           value={props.value}
           placeholder={props.placeholder}
           placeholderTextColor="#000000"
-          onChangeText={props.handleChangeText}
+          onChangeText={props.onChange}
         />
       </View>
     </View>
