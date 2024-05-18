@@ -12,7 +12,7 @@ const FilledFormField = (props) => {
           className="flex-1 text-black font-psemibold text-base"
           value={props.value}
           placeholder={props.placeholder}
-          placeholderTextColor="#000000"
+          placeholderTextColor="#BDBDBD"
           onChangeText={props.onChange}
         />
       </View>
