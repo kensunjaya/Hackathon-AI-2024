@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const Ongoing = () => {
+const Inbox = () => {
   return (
     <View>
-      <Text>Ongoing</Text>
+      <Text> Inbox</Text>
     </View>
   );
 };
 
-export default Ongoing;
+export default Inbox;
