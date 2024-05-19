@@ -13,13 +13,12 @@ import { useUser, useUserUpdate } from "../hooks/Context";
 import { updatePassword } from "firebase/auth";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CustomCardTeller } from "../../components/CustomCard";
+import { deleteDocument } from "../../utility/backend";
 
 const ProblemDetail = () => {
   const { selectedProblem } = useUser();
+  const { updateProblemData } = useUserUpdate();
   console.log(selectedProblem);
-  
-  const [newPassword, setNewPassword] = useState("");
-  const [oldPassword, setOldPassword] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -28,7 +27,7 @@ const ProblemDetail = () => {
       <View className="h-full bg-beige flex-1">
         <View className="bg-primary h-full w-full py-5 flex-1">
           <Text className="text-center pt-5 font-psemibold text-xl text-gray-500">Detil Permasalahan</Text>
-          <View className="border border-bluesk my-3">          
+          <View className="my-3 border border-bluesk">          
             <View className="px-3">
               <View className="flex-row py-1">
                 <Text className="text-gray-500 font-psemibold text-sm">Email: </Text>
@@ -70,13 +69,27 @@ const ProblemDetail = () => {
           </View>
         </View>
       </View>
-      <CustomButton
-        title="Proses Permasalahan"
-        handlePress={() => router.push('/sendProblemResponse')}
-        containerStyles="mt-7 bg-btn_primary m-5"
-        textStyles="text-white"
-        isLoading={isSubmitting}
-      />
+      <View className="flex-row w-full justify-center">
+        <CustomButton
+          title="Hapus"
+          handlePress={() => {
+            deleteDocument('problems', selectedProblem.id);
+            updateProblemData();
+            Alert.alert("Success", "Permasalahan berhasil dihapus");
+            router.push('/tellerpage');
+          }}
+          containerStyles="mt-7 bg-lightred ml-5 mr-2.5 my-5 flex-1"
+          textStyles="text-white"
+          isLoading={isSubmitting}
+        />
+        <CustomButton
+          title="Proses"
+          handlePress={() => router.push('/sendProblemResponse')}
+          containerStyles="mt-7 bg-btn_primary mr-5 ml-2.5 my-5 flex-1"
+          textStyles="text-white"
+          isLoading={isSubmitting}
+        />
+      </View>
       <View className="flex-row justify-center">
         <Text className="text-gray-500 text-sm font-pregular pb-5">Akun Teller @BAITS | </Text>
         <Link className="text-sm text-btn_primary font-psemibold pb-5" href="/sign-in">Logout</Link>

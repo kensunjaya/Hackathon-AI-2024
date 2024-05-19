@@ -70,13 +70,13 @@ const SignIn = () => {
                 handleChangeText={(e) => setForm({ ...form, email: e })}
                 otherStyles="mt-7"
                 keyboardTypes="email-address"
-                placeholder="email"
+                placeholder="Email"
               />
               <FormField
                 title="Password"
                 value={form.password}
                 handleChangeText={(e) => setForm({ ...form, password: e })}
-                placeholder="password"
+                placeholder="Password"
                 otherStyles="mt-7"
               />
               <View className="flex-row justify-end pt-5">
@@ -88,9 +88,9 @@ const SignIn = () => {
                   </TouchableWithoutFeedback>
                 </View>
               <CustomButton
-                title="Login"
+                title="Masuk"
                 handlePress={submit}
-                containerStyles="w-full mt-7 bg-btn_primary"
+                containerStyles="w-full mt-5 bg-btn_primary"
                 textStyles="text-white"
                 isLoading={isSubmitting}
               />

@@ -159,7 +159,7 @@ const SignUp = () => {
             otherStyles="mt-7"
           />
           <CustomButton
-            title="Register"
+            title="Daftar"
             handlePress={handleSubmit}
             containerStyles="w-full mt-7 bg-btn_primary"
             textStyles="text-white"

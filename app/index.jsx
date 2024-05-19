@@ -21,30 +21,33 @@ export default function App() {
           <View className="w-full justify-center items-center min-h-[100vh] px-4">
             <View>
               <Image
-                source={images.logo}
+                source={images.baitslogo}
                 className="w-[226.09px] h-[223px]"
                 resizeMode="contain"
               />
             </View>
             <View className="relative mt-5">
               <Text className="text-3xl text-black font-bold text-center">
-                Hello
+                Halo
               </Text>
               <Text className="font-pmedium text-1xl text-gray text-center">
-                Welcome to BAITS, where Banking made simpler for everyone
+                Selamat Datang di BAITS
+              </Text>
+              <Text className="font-pmedium text-1xl text-btn_primary text-center">
+                "Kemudahan perbankan untuk semua"
               </Text>
             </View>
             <CustomButton
-              title="Login"
+              title="Masuk"
               handlePress={() => router.push("/sign-in")}
               containerStyles="w-full mt-7 bg-btn_primary"
-              textStyles="text-white"
+              textStyles="text-white font-psemibold"
             />
             <CustomButton
-              title="Register"
+              title="Daftar"
               handlePress={() => router.push("/sign-up")}
               containerStyles="w-full mt-7 bg-btn_secondary"
-              textStyles="text-black"
+              textStyles="text-gray font-psemibold"
             />
           </View>
         </ScrollView>

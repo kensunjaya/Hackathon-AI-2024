@@ -15,6 +15,7 @@ module.exports = {
         thirdary: "rgba(252, 248, 236, 1)",
         bluesk: "#77A4E5",
         beige: "#FCF8EC",
+        lightred: '#D22B2B',
         black: {
           DEFAULT: "#000",
           100: "#1E1E2D",

@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../app/config/firebase";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import { get } from "firebase/database";
 import { Alert } from "react-native";
 
@@ -45,7 +45,9 @@ const getProblem = async() => {
     const collectionRef = collection(db, 'problems')
     const snapshot = await getDocs(collectionRef);
     snapshot.docs.forEach((doc) => {
-      problems.push(doc.data());
+      let document = doc.data();
+      document.id = doc.id;
+      problems.push(document);
     });
     return problems;
   } catch (e) {
@@ -54,4 +56,13 @@ const getProblem = async() => {
   }
 };
 
-export {getUser, getBank, getProblem};
+const deleteDocument = async (collectionName, docName) => {
+  try {
+    await deleteDoc(doc(db, collectionName, docName));
+    console.log("Document successfully deleted!");
+  } catch (e) {
+    console.error("Error removing document: ", e);
+  }
+};
+
+export { getUser, getBank, getProblem, deleteDocument };

@@ -1,7 +1,7 @@
-import { View, Text, ScrollView, Alert, FlatList } from "react-native";
+import { View, Text, ScrollView, Alert, FlatList, RefreshControl } from "react-native";
 import React, { useState } from "react";
 import { Image } from "react-native";
-import { images } from "../../constants";
+import { icons, images } from "../../constants";
 import { StatusBar } from "expo-status-bar";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
@@ -16,11 +16,21 @@ import { CustomCardTeller } from "../../components/CustomCard";
 
 const TellerPage = () => {
   const { problemData } = useUser();
-  const { updateSelectedProblem } = useUserUpdate();
+  const { updateSelectedProblem, updateProblemData } = useUserUpdate();
   console.log(problemData);
 
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    updateProblemData();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
+  }, []);
+
   return (
-    <SafeAreaView className="flex-1 bg-primary">
+    <SafeAreaView className="flex-1 bg-primary">  
       <View className="h-full bg-beige flex-1">
         <View className="bg-primary h-full w-full px-4 py-5 flex-1">
           <Text className="text-center p-5 font-psemibold text-xl text-gray-500">Daftar permasalahan</Text>
@@ -40,8 +50,12 @@ const TellerPage = () => {
               />
             )}
             ListEmptyComponent={() => (
-              <Text className="text-gray-500 text-sm font-pregular text-center">Tidak ada permasalahan yang dilaporkan oleh nasabah</Text>
+              <View className="items-center">
+                <Image source={icons.EmptyInbox} className="w-40 h-40 m-10" />
+                <Text className="text-gray-500 text-sm font-pregular text-center">Tidak ada permasalahan yang dilaporkan oleh nasabah</Text>
+              </View>
             )}
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
             vertical
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}

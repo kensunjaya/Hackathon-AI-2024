@@ -3,7 +3,6 @@ import thumbnail from "../assets/images/thumbnail.png";
 import cards from "../assets/images/cards.png";
 import path from "../assets/images/path.png";
 import logo from "../assets/images/logo.png";
-import logoSmall from "../assets/images/logoHackaton.png";
 import empty from "../assets/images/empty.png";
 import loginImage from "../assets/images/LoginImage.png";
 import img1 from "../assets/images/img1.png";
@@ -13,6 +12,7 @@ import seidelbank from "../assets/images/seidelbank.png";
 import historybg from "../assets/images/historybg.png";
 import registerImage from "../assets/images/RegisterImage.png";
 import addbankbg from "../assets/images/addbankbg.png";
+import baitslogo from "../assets/images/baitslogo.png";
 
 export default {
   profile,
@@ -20,7 +20,6 @@ export default {
   cards,
   path,
   logo,
-  logoSmall,
   empty,
   loginImage,
   img1,
@@ -30,4 +29,5 @@ export default {
   historybg,
   registerImage,
   addbankbg,
+  baitslogo,
 };

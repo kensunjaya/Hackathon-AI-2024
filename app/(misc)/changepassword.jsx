@@ -56,17 +56,17 @@ const AddBank = () => {
             value={oldPassword}
             handleChangeText={(e) => setOldPassword(e)}
             otherStyles="mt-7"
-            placeholder="Kata Sandi Lama"
+            placeholder="Password lama"
           />
           <FormField
             title="New Password"
             value={newPassword}
             handleChangeText={(e) => setNewPassword(e)}
             otherStyles="mt-7"
-            placeholder="Kata Sandi Baru"
+            placeholder="Password Baru"
           />
           <CustomButton
-            title="Ubah Kata Sandi"
+            title="Ubah Password"
             handlePress={submit}
             containerStyles="w-full mt-7 bg-btn_primary"
             textStyles="text-white"
