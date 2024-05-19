@@ -33,7 +33,7 @@ const Inbox = () => {
               <CustomCardInbox
                 className="rounded-full w-[12.5vh] h-[20vh] bg-white mr-[2.5vh] mt-[3vh] flex justify-end"
                 bank={item.bank}
-                norek={item.norek}
+                norek={item.norek.slice(0, 3) + '-' + item.norek.slice(3, 6) + '-' + item.norek.slice(6)}
                 title={item.title}
               />
             )}

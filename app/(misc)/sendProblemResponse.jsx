@@ -51,7 +51,8 @@ const SendProblemResponse = () => {
     <SafeAreaView className="flex-1 bg-primary mx-3">
       <View className="h-full bg-primary flex-1">
         <View className="my-10 h-full">
-          <Text className="text-gray-500 font-psemibold text-xl text-center">Cantumkan pesan untuk ditampilkan ke inbox nasabah</Text>
+          <Text className="text-gray-500 font-psemibold text-xl text-center mb-5">Cantumkan pesan untuk ditampilkan ke inbox nasabah</Text>
+          <Text className="text-gray-500 font-pregular text-sm">{'>'} {selectedProblem.email}</Text>
           <FormField
             title="Pesan"
             value={message}

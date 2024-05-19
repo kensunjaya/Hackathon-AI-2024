@@ -39,7 +39,7 @@ const ProblemDetail = () => {
               </View>
               <View className="flex-row py-1">
                 <Text className="text-gray-500 font-psemibold text-sm">Nomor rekening: </Text>
-                <Text className="text-gray-500 font-pregular text-sm">{selectedProblem.norek}</Text>   
+                <Text className="text-gray-500 font-pregular text-sm">{selectedProblem.norek.slice(0, 3) + '-' + selectedProblem.norek.slice(3, 6) + '-' + selectedProblem.norek.slice(6)}</Text>   
               </View>
               <View className="flex-row py-1">
                 <Text className="text-gray-500 font-psemibold text-sm">Deskripsi: </Text>

@@ -43,7 +43,7 @@ const TellerPage = () => {
                 bank={item.bank}
                 description={item.description}
                 email={item.email}
-                norek={item.norek}
+                norek={item.norek.slice(0, 3) + '-' + item.norek.slice(3, 6) + '-' + item.norek.slice(6)}
                 handlePress={() => {
                   updateSelectedProblem(item);
                   router.push('/problemdetail')}}
