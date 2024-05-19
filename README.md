@@ -25,3 +25,7 @@ npm install
 ```
 npx expo start -c
 ```
+or
+```
+npm run start
+```
