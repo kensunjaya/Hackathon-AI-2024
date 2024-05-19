@@ -52,7 +52,7 @@ const ProblemDetail = () => {
             <FlatList
               // className="border"
               data={selectedProblem.berkas}
-              keyExtractor={(item, index) => {return index}}
+              keyExtractor={(item, index) => String(index)}
               renderItem={({ item }) => (
                 <View className="py-2">
                   <Text className="text-gray-500 font-psemibold text-sm">{item.title}</Text>

@@ -18,7 +18,6 @@ const SignIn = () => {
   const { updateUserData, updateProblemData } = useUserUpdate();
 
   const [form, setForm] = useState({ email: "", password: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const forgotPassword = async () => {
     sendPasswordResetEmail(auth, form.email, null)
@@ -92,7 +91,6 @@ const SignIn = () => {
                 handlePress={submit}
                 containerStyles="w-full mt-5 bg-btn_primary"
                 textStyles="text-white"
-                isLoading={isSubmitting}
               />
               <View className="justify-center items-center pt-5">
                 <View className="flex-row gap-2">

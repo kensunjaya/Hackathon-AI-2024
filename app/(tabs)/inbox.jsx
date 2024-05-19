@@ -28,7 +28,7 @@ const Inbox = () => {
         <View className="flex-row flex-1">
           <FlatList
             data={data}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item, index) => String(index)}
             renderItem={({ item }) => (
               <CustomCardInbox
                 className="rounded-full w-[12.5vh] h-[20vh] bg-white mr-[2.5vh] mt-[3vh] flex justify-end"

@@ -28,11 +28,11 @@ const Home = () => {
                 <FlatList
                   // className="border"
                   data={cardData}
-                  keyExtractor={(item, index) => {return index}}
+                  keyExtractor={(item, index) => String(index)}
                   renderItem={({ item }) => (
                     <CustomCardRekening
                       namabank={item.namabank}
-                      norek={item.norek}
+                      norek={item.norek.slice(0, 3) + '-' + item.norek.slice(3, 6) + '-' + item.norek.slice(6)}
                       logo={item.logo}
                       handlePress={() => {router.push('/problem')}}
                     />
