@@ -7,6 +7,7 @@ import { UserProvider } from "./hooks/Context";
 SplashScreen.preventAutoHideAsync(); // prevent the splash screen from auto hiding
 
 const RootLayout = () => {
+  // console.disableYellowBox = true;
   const [fontsLoaded, error] = useFonts({
     "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
     "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),

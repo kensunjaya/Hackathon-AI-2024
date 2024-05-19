@@ -36,7 +36,6 @@ const SignIn = () => {
         const currentUser = await getUser(form.email);
         
         if (currentUser) {
-          updateUserData(); // panggil update function di context.js
           router.push("/home");
         }
         else {

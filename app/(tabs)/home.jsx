@@ -1,5 +1,5 @@
 import { View, Text, Image, ImageBackground, FlatList, ScrollView, Alert } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images, icons } from "../../constants";
 import { StatusBar } from "expo-status-bar";
@@ -11,6 +11,10 @@ import CustomButton from "../../components/CustomButton";
 
 const Home = () => {
   const { userData } = useUser();
+  const { updateUserData } = useUserUpdate();
+  useEffect(() => {
+    updateUserData();
+  }, [])
   console.log("UserDATA", userData);
   const cardData = userData.rekening
   const namaDepan = userData.namaLengkap.split(" ")[0];
