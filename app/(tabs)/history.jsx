@@ -86,13 +86,10 @@ const History = () => {
 
       <View className="h-full bg-beige flex-1">
         <SafeAreaView className="pt-[1rem] relative h-full bg-primary rounded-t-[40px] flex-1">
-          <Text className="text-2xl text-center font-psemibold pb-5">
+          <Text className="text-2xl text-center font-psemibold pb-5 text-gray-800">
             Riwayat Kegiatan Anda
           </Text>
           <View className="px-[3vh] flex-1">
-            <Text className="text-sm font-pregular mt-[1vh] mb-3">
-              Past 3 months
-            </Text>
             <FlatList
               // className="border"
               data={data}
@@ -107,7 +104,7 @@ const History = () => {
               )}
               ListEmptyComponent={() => (
                 <View>
-                  <Text className="text-center font-psemibold text-lg mt-5">
+                  <Text className="text-center font-pregular text-lg mt-10">
                     Tidak ada riwayat kegiatan
                   </Text>
                 </View>

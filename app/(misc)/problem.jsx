@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
 import { useUser } from '../hooks/Context';
-import { postProblem } from '../../utility/backend';
+import { postProblem, postRiwayat } from '../../utility/backend';
 
 const data1 = [
   { label: 'Masalah dengan kartu ATM', value: 'ATM' },
@@ -85,16 +85,18 @@ const DropdownComponent = () => {
   const [selectedValue3, setSelectedValue3] = useState(null);
   const { selectedBank, userData } = useUser();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async () => { // later handleSubmit ini boleh dipindahin ke page submitProblem.jsx, jangan lupa import component dan library nya
     let descriptionBuilder = data1.find(obj => obj.value === selectedValue1).label;
     selectedValue2 ? descriptionBuilder += ', ' + subdata1[selectedValue1].find(obj => obj.value === selectedValue2).label : {};
     selectedValue3 ? descriptionBuilder += ', ' + subdata2[selectedValue2].find(obj => obj.value === selectedValue3).label : {};
     try {
       await postProblem(selectedBank.bank, [], descriptionBuilder, userData.email, selectedBank.norek); // ini nanti array kosongnya diganti dengan berkas yang dilampirkan user
+      await postRiwayat(selectedBank.bank, descriptionBuilder, new Date(), userData.email);
       Alert.alert("Success", "Masalah berhasil diajukan. Cek inbox Anda secara berkala untuk mendapatkan informasi lebih lanjut.");
     }
-    catch {
+    catch (e) {
       Alert.alert("Error", "Gagal mengajukan masalah");
+      console.error(e.message);
     }
     finally {
       router.push("/home");
