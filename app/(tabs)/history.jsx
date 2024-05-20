@@ -12,13 +12,28 @@ import { images, icons } from "../../constants";
 import { StatusBar } from "expo-status-bar";
 import { CustomCardHistory } from "../../components/CustomCard";
 import { useUser, useUserUpdate } from "../hooks/Context";
+import { doc, updateDoc } from "firebase/firestore";
 
 const History = () => {
   const { userData } = useUser();
   const { updateUserData } = useUserUpdate();
-  const [refreshing, setRefreshing] = React.useState(false);
   const data = userData.riwayat;
   let tempData = data;
+
+  const handleDelete = async (index) => {
+    tempData.splice(index, 1);
+    try {
+      await updateDoc(doc(db, "users", userData.email), {
+        inbox: tempData,
+      }).then(() => {
+        updateUserData();
+        Alert.alert("Success", "Inbox berhasil dihapus");
+      });
+    } catch (e) {
+      console.error("Failed to delete inbox: ", e);
+      Alert.alert("Error", "Terjadi error saat menghapus inbox");
+    }
+  };
 
   // const cardData = [
   //   {
@@ -80,12 +95,12 @@ const History = () => {
               // className="border"
               data={data}
               keyExtractor={(item, index) => String(index)}
-              renderItem={({ item }) => (
+              renderItem={({ item, index }) => (
                 <CustomCardHistory
                   title={item.title}
                   subtitle={item.bank}
-                  // logo={item.logo}
                   date={item.date}
+                  handlePress={() => handleDelete(index)}
                 />
               )}
               ListEmptyComponent={() => (

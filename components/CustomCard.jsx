@@ -18,13 +18,22 @@ const CustomCardHistory = (props) => {
 
   return (
     <View className="bg-white rounded-[20px] mb-[3vh] flex p-5">
-      <View>
-        <Text className="font-psemibold text-gray-200 text-sm mb-3">
-          {stringDate.slice(4, 16)}
-        </Text>
-        <Text className="font-pregular text-gray-200 text-s">
-          {props.title}
-        </Text>
+      <View className="flex-row">
+        <View>
+          <Text className="font-psemibold text-gray-200 text-sm mb-3">
+            {stringDate.slice(4, 16)}
+          </Text>
+          <Text className="font-pregular text-gray-200 text-s ">
+            {props.title}
+          </Text>
+        </View>
+        <TouchableOpacity className="ml-auto" onPress={props.handlePress}>
+          <Image
+            source={icons.trash}
+            className="w-4 h-4"
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
       </View>
       <SafeAreaView className="items-end flex-row">
         <Text className="text-gray-200 text-s">{props.subtitle} Bank</Text>
