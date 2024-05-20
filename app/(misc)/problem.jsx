@@ -79,16 +79,101 @@ const subdata2 = {
   ],
 };
 
+const subdata3 = {
+  ATM1A: [
+    { label: 'Kunjungi cabang bank', value: 'ATM1A1' },
+    { label: 'Kirim email laporan', value: 'ATM1A2' },
+  ],
+  ATM1B: [
+    { label: 'Blokir melalui mobile banking', value: 'ATM1B1' },
+    { label: 'Hubungi layanan nasabah', value: 'ATM1B2' },
+  ],
+  ATM2A: [
+    { label: 'Kunjungi cabang terdekat', value: 'ATM2A1' },
+    { label: 'Ajukan secara online', value: 'ATM2A2' },
+  ],
+  ATM2B: [
+    { label: 'Hubungi teknisi', value: 'ATM2B1' },
+    { label: 'Kunjungi cabang bank', value: 'ATM2B2' },
+  ],
+  ATM3A: [
+    { label: 'Isi formulir pembukaan blokir', value: 'ATM3A1' },
+    { label: 'Verifikasi data diri', value: 'ATM3A2' },
+  ],
+  ATM3B: [
+    { label: 'Ajukan kartu baru melalui CS', value: 'ATM3B1' },
+    { label: 'Isi formulir pengajuan kartu', value: 'ATM3B2' },
+  ],
+  ATM4A: [
+    { label: 'Datang ke cabang bank', value: 'ATM4A1' },
+    { label: 'Hubungi customer service', value: 'ATM4A2' },
+  ],
+  ATM4B: [
+    { label: 'Ajukan kartu baru online', value: 'ATM4B1' },
+    { label: 'Kunjungi cabang untuk pengajuan', value: 'ATM4B2' },
+  ],
+  TRANSACTION1A: [
+    { label: 'Cek status di aplikasi', value: 'TRANSACTION1A1' },
+    { label: 'Hubungi customer service', value: 'TRANSACTION1A2' },
+  ],
+  TRANSACTION1B: [
+    { label: 'Isi formulir komplain', value: 'TRANSACTION1B1' },
+    { label: 'Kirim email komplain', value: 'TRANSACTION1B2' },
+  ],
+  TRANSACTION2A: [
+    { label: 'Hubungi layanan nasabah', value: 'TRANSACTION2A1' },
+    { label: 'Kirim email ke bank', value: 'TRANSACTION2A2' },
+  ],
+  TRANSACTION2B: [
+    { label: 'Pantau di aplikasi', value: 'TRANSACTION2B1' },
+    { label: 'Hubungi layanan nasabah', value: 'TRANSACTION2B2' },
+  ],
+  TRANSACTION3A: [
+    { label: 'Ajukan koreksi melalui aplikasi', value: 'TRANSACTION3A1' },
+    { label: 'Hubungi customer service', value: 'TRANSACTION3A2' },
+  ],
+  TRANSACTION3B: [
+    { label: 'Isi formulir komplain', value: 'TRANSACTION3B1' },
+    { label: 'Kirim email komplain', value: 'TRANSACTION3B2' },
+  ],
+  ACCOUNT1A: [
+    { label: 'Cek di aplikasi mobile banking', value: 'ACCOUNT1A1' },
+    { label: 'Cetak mutasi di ATM', value: 'ACCOUNT1A2' },
+  ],
+  ACCOUNT1B: [
+    { label: 'Hubungi layanan nasabah', value: 'ACCOUNT1B1' },
+    { label: 'Kunjungi cabang bank', value: 'ACCOUNT1B2' },
+  ],
+  ACCOUNT2A: [
+    { label: 'Aktivasi melalui aplikasi', value: 'ACCOUNT2A1' },
+    { label: 'Kunjungi cabang terdekat', value: 'ACCOUNT2A2' },
+  ],
+  ACCOUNT2B: [
+    { label: 'Verifikasi online', value: 'ACCOUNT2B1' },
+    { label: 'Kunjungi cabang untuk verifikasi', value: 'ACCOUNT2B2' },
+  ],
+  ACCOUNT3A: [
+    { label: 'Perbaiki melalui aplikasi', value: 'ACCOUNT3A1' },
+    { label: 'Hubungi customer service', value: 'ACCOUNT3A2' },
+  ],
+  ACCOUNT3B: [
+    { label: 'Hubungi customer service', value: 'ACCOUNT3B1' },
+    { label: 'Kunjungi cabang untuk perbaikan', value: 'ACCOUNT3B2' },
+  ],
+};
+
 const DropdownComponent = () => {
   const [selectedValue1, setSelectedValue1] = useState(null);
   const [selectedValue2, setSelectedValue2] = useState(null);
   const [selectedValue3, setSelectedValue3] = useState(null);
+  const [selectedValue4, setSelectedValue4] = useState(null);
   const { selectedBank, userData } = useUser();
 
   const handleSubmit = async () => {
     let descriptionBuilder = data1.find(obj => obj.value === selectedValue1).label;
     selectedValue2 ? descriptionBuilder += ', ' + subdata1[selectedValue1].find(obj => obj.value === selectedValue2).label : {};
     selectedValue3 ? descriptionBuilder += ', ' + subdata2[selectedValue2].find(obj => obj.value === selectedValue3).label : {};
+    selectedValue4 ? descriptionBuilder += ', ' + subdata2[selectedValue3].find(obj => obj.value === selectedValue4).label : {};
     try {
       await postProblem(selectedBank.bank, [], descriptionBuilder, userData.email, selectedBank.norek); // ini nanti array kosongnya diganti dengan berkas yang dilampirkan user
       Alert.alert("Success", "Masalah berhasil diajukan. Cek inbox Anda secara berkala untuk mendapatkan informasi lebih lanjut.");
@@ -121,6 +206,7 @@ const DropdownComponent = () => {
         setSelectedValue1(item.value);
         setSelectedValue2(null); // Reset the second dropdown
         setSelectedValue3(null); // Reset the third dropdown
+        setSelectedValue4(null); // Reset the fourth dropdown
       }}
     />
     {selectedValue1 && (
@@ -141,6 +227,7 @@ const DropdownComponent = () => {
           onChange={item => {
             setSelectedValue2(item.value);
             setSelectedValue3(null); // Reset the third dropdown
+            setSelectedValue4(null); // Reset the fourth dropdown
           }}
         />
       )}
@@ -161,6 +248,27 @@ const DropdownComponent = () => {
           value={selectedValue3}
           onChange={item => {
             setSelectedValue3(item.value);
+            setSelectedValue4(null); // Reset the fourth dropdown
+          }}
+        />
+      )}
+      {selectedValue3 && (
+        <Dropdown
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={subdata3[selectedValue3] || []}
+          search
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder="Pilih permasalahan"
+          searchPlaceholder="Search..."
+          value={selectedValue4}
+          onChange={item => {
+            setSelectedValue4(item.value);
           }}
         />
       )}
