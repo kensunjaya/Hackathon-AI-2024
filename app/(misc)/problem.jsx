@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet} from 'react-native';
+import { Alert, StyleSheet, Text, View} from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from "../../components/CustomButton";
@@ -173,7 +173,7 @@ const DropdownComponent = () => {
     let descriptionBuilder = data1.find(obj => obj.value === selectedValue1).label;
     selectedValue2 ? descriptionBuilder += ', ' + subdata1[selectedValue1].find(obj => obj.value === selectedValue2).label : {};
     selectedValue3 ? descriptionBuilder += ', ' + subdata2[selectedValue2].find(obj => obj.value === selectedValue3).label : {};
-    selectedValue4 ? descriptionBuilder += ', ' + subdata2[selectedValue3].find(obj => obj.value === selectedValue4).label : {};
+    selectedValue4 ? descriptionBuilder += ', ' + subdata3[selectedValue3].find(obj => obj.value === selectedValue4).label : {};
     try {
       await postProblem(selectedBank.bank, [], descriptionBuilder, userData.email, selectedBank.norek); // ini nanti array kosongnya diganti dengan berkas yang dilampirkan user
       await postRiwayat(selectedBank.bank, descriptionBuilder, new Date(), userData.email);
@@ -190,6 +190,10 @@ const DropdownComponent = () => {
 
   return (
     <SafeAreaView className="h-full bg-primary flex-1 pt-5">
+    <View className="items-center pt-5 pb-3">
+      <Text className="font-psemibold text-xl">Rekening {selectedBank.bank}</Text>
+      <Text className="font-pregular text-xl">{selectedBank.norek.slice(0, 3) + '-' + selectedBank.norek.slice(3, 6) + '-' + selectedBank.norek.slice(6)}</Text>
+    </View>
     <Dropdown
       style={styles.dropdown}
       placeholderStyle={styles.placeholderStyle}
@@ -290,25 +294,25 @@ export default DropdownComponent;
 const styles = StyleSheet.create({ 
   dropdown: {
     margin: 16,
-    height: 50,
+    height: 62,
     backgroundColor: 'white',
-    borderRadius: 20,
+    borderRadius: 25,
+    borderColor: '#00000',
     padding: 12,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 0,
     },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0,
     shadowRadius: 1.41,
-
-    elevation: 2,
+    elevation: 0,
   },
   icon: {
     marginRight: 5,
   },
   item: {
-    padding: 17,
+    padding: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -316,19 +320,24 @@ const styles = StyleSheet.create({
   textItem: {
     flex: 1,
     fontSize: 16,
+    fontFamily: 'Poppins-SemiBold',
   },
   placeholderStyle: {
     fontSize: 16,
+    fontFamily: 'Poppins-SemiBold',
+    color: '#D1D1D1',
   },
   selectedTextStyle: {
     fontSize: 16,
+    fontFamily: 'Poppins-SemiBold',
   },
   iconStyle: {
     width: 20,
     height: 20,
   },
   inputSearchStyle: {
-    height: 40,
+    height: 42,
     fontSize: 16,
+    fontFamily: 'Poppins-SemiBold',
   },
 });

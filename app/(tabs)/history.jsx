@@ -39,11 +39,11 @@ const History = () => {
         riwayat: tempData,
       }).then(() => {
         updateUserData();
-        Alert.alert("Success", "Inbox berhasil dihapus");
+        Alert.alert("Success", "Riwayat berhasil dihapus");
       });
     } catch (e) {
       console.error("Failed to delete inbox: ", e);
-      Alert.alert("Error", "Terjadi error saat menghapus inbox");
+      Alert.alert("Error", "Terjadi error saat menghapus riwayat");
     }
   };
 
