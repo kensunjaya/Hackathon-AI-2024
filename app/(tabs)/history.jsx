@@ -5,6 +5,7 @@ import {
   ImageBackground,
   FlatList,
   ScrollView,
+  Alert,
 } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,6 +14,7 @@ import { StatusBar } from "expo-status-bar";
 import { CustomCardHistory } from "../../components/CustomCard";
 import { useUser, useUserUpdate } from "../hooks/Context";
 import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 const History = () => {
   const { userData } = useUser();
@@ -24,7 +26,7 @@ const History = () => {
     tempData.splice(index, 1);
     try {
       await updateDoc(doc(db, "users", userData.email), {
-        inbox: tempData,
+        riwayat: tempData,
       }).then(() => {
         updateUserData();
         Alert.alert("Success", "Inbox berhasil dihapus");
