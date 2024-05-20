@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../app/config/firebase";
-import { collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import { get } from "firebase/database";
 import { Alert } from "react-native";
 
@@ -39,7 +39,21 @@ const getBank = async () => {
   }
 };
 
-const getProblem = async() => {
+const postProblem = async (bank, berkas, description, email, norek) => {
+  try {
+    await addDoc(collection(db, "problems"), {
+      bank: bank,
+      berkas: berkas,
+      description: description,
+      email: email,
+      norek: norek,
+    });
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+
+const getProblem = async () => {
   try {
     const problems = [];
     const collectionRef = collection(db, 'problems')
@@ -65,4 +79,4 @@ const deleteDocument = async (collectionName, docName) => {
   }
 };
 
-export { getUser, getBank, getProblem, deleteDocument };
+export { getUser, getBank, getProblem, deleteDocument, postProblem };

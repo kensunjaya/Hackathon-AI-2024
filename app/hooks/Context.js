@@ -32,6 +32,7 @@ export function UserProvider({ children }) {
   }]);
   const [problemData, setProblemData] = useState([])
   const [selectedProblem, setSelectedProblem] = useState({})
+  const [selectedBank, setSelectedBank] = useState({})
 
   useEffect(() => {
     const fetchBankData = async () => {
@@ -69,10 +70,14 @@ export function UserProvider({ children }) {
   function updateSelectedProblem(problem) {
     setSelectedProblem(problem);
   }
+
+  function updateSelectedBank(bank) {
+    setSelectedBank(bank);
+  }
   
   return (    
-    <UserContext.Provider value={{ userData, bankData, problemData, selectedProblem }}>
-      <UserUpdateContext.Provider value={{ updateUserData, updateProblemData, updateSelectedProblem }}>
+    <UserContext.Provider value={{ userData, bankData, problemData, selectedProblem, selectedBank }}>
+      <UserUpdateContext.Provider value={{ updateUserData, updateProblemData, updateSelectedProblem, updateSelectedBank }}>
         {children}
       </UserUpdateContext.Provider>
     </UserContext.Provider>

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet} from 'react-native';
+import { Alert, StyleSheet} from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
+import { useUser } from '../hooks/Context';
+import { postProblem } from '../../utility/backend';
 
 const data1 = [
   { label: 'Masalah dengan kartu ATM', value: 'ATM' },
@@ -81,6 +83,23 @@ const DropdownComponent = () => {
   const [selectedValue1, setSelectedValue1] = useState(null);
   const [selectedValue2, setSelectedValue2] = useState(null);
   const [selectedValue3, setSelectedValue3] = useState(null);
+  const { selectedBank, userData } = useUser();
+
+  const handleSubmit = async () => {
+    let descriptionBuilder = data1.find(obj => obj.value === selectedValue1).label;
+    selectedValue2 ? descriptionBuilder += ', ' + subdata1[selectedValue1].find(obj => obj.value === selectedValue2).label : {};
+    selectedValue3 ? descriptionBuilder += ', ' + subdata2[selectedValue2].find(obj => obj.value === selectedValue3).label : {};
+    try {
+      await postProblem(selectedBank.bank, [], descriptionBuilder, userData.email, selectedBank.norek); // ini nanti array kosongnya diganti dengan berkas yang dilampirkan user
+      Alert.alert("Success", "Masalah berhasil diajukan. Cek inbox Anda secara berkala untuk mendapatkan informasi lebih lanjut.");
+    }
+    catch {
+      Alert.alert("Error", "Gagal mengajukan masalah");
+    }
+    finally {
+      router.push("/home");
+    }
+  }
 
   return (
     <SafeAreaView className="h-full bg-primary flex-1 pt-5">
@@ -147,9 +166,7 @@ const DropdownComponent = () => {
       )}
       <CustomButton
         title="Submit"
-        handlePress={() => {
-          router.push("/home");
-        }}
+        handlePress={handleSubmit}
         containerStyles="bg-btn_primary mx-3 my-5"
         textStyles="text-white font-pregular"
         isLoading={false}

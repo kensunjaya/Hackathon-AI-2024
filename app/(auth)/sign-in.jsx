@@ -6,7 +6,7 @@ import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { app, auth, db } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { get } from "firebase/database";
