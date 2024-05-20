@@ -11,11 +11,11 @@ import CustomButton from "../../components/CustomButton";
 
 const Home = () => {
   const { userData } = useUser();
-  const { updateUserData } = useUserUpdate();
+  const { updateUserData, updateSelectedBank } = useUserUpdate();
   useEffect(() => {
     updateUserData();
+    console.log("UserDATA", userData);
   }, [])
-  console.log("UserDATA", userData);
   const cardData = userData.rekening
   const namaDepan = userData.namaLengkap.split(" ")[0];
   return (
@@ -38,7 +38,10 @@ const Home = () => {
                       namabank={item.namabank}
                       norek={item.norek.slice(0, 3) + '-' + item.norek.slice(3, 6) + '-' + item.norek.slice(6)}
                       logo={item.logo}
-                      handlePress={() => {router.push('/problem')}}
+                      handlePress={() => {
+                        updateSelectedBank({bank: item.namabank, norek: item.norek})
+                        router.push('/problem');
+                      }}
                     />
                   )}
                   vertical
