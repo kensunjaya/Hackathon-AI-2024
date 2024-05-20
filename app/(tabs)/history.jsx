@@ -16,9 +16,10 @@ import { CustomCardHistory } from "../../components/CustomCard";
 import { useUser, useUserUpdate } from "../hooks/Context";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { getBank } from "../../utility/backend";
 
 const History = () => {
-  const { userData } = useUser();
+  const { userData, bankData } = useUser();
   const { updateUserData } = useUserUpdate();
   const data = userData.riwayat;
   const [refreshing, setRefreshing] = useState(false);
@@ -68,6 +69,7 @@ const History = () => {
               renderItem={({ item, index }) => (
                 <CustomCardHistory
                   title={item.title}
+                  logo={bankData.find((bank) => bank.label === item.bank).value.logo}
                   subtitle={item.bank}
                   date={item.date}
                   handlePress={() => handleDelete(index)}

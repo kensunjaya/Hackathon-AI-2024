@@ -7,15 +7,6 @@ import { images } from "../constants";
 const CustomCardHistory = (props) => {
   const date = new Date(props.date.seconds * 1000);
   const stringDate = date.toString();
-
-  if (props.subtitle === "Fuze") {
-    logo = images.fuzebank;
-  } else if (props.subtitle === "Seidel") {
-    logo = images.seidelbank;
-  } else if (props.subtitle === "Bean") {
-    logo = images.beanbank;
-  }
-
   return (
     <View className="bg-white rounded-[20px] mb-[3vh] flex p-5">
       <View className="flex-row">
@@ -39,7 +30,7 @@ const CustomCardHistory = (props) => {
         <Text className="text-gray-200 text-s">{props.subtitle} Bank</Text>
         <View className="ml-auto">
           <Image
-            source={logo}
+            src={props.logo}
             className="w-[6vh] h-[6vh]"
             resizeMode="contain"
           />
