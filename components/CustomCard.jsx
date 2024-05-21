@@ -26,7 +26,7 @@ const CustomCardHistory = (props) => {
           />
         </TouchableOpacity>
       </View>
-      <SafeAreaView className="items-end flex-row">
+      <View className="items-end flex-row h-fit">
         <Text className="text-gray-200 text-s">{props.subtitle} Bank</Text>
         <View className="ml-auto">
           <Image
@@ -35,7 +35,7 @@ const CustomCardHistory = (props) => {
             resizeMode="contain"
           />
         </View>
-      </SafeAreaView>
+      </View>
     </View>
   );
 };
@@ -78,13 +78,13 @@ const CustomCardTeller = (props) => {
           <Text className="font-psemibold text-gray-200 text-sm">
             {props.email}
           </Text>
-          <Text className="text-gray-200 text-xl my-1">
+          <Text className="text-gray-200 text-sm my-2 font-pregular">
             {props.description}
           </Text>
           <View className="flex-row w-full">
-            <Text className="text-gray-200 text-sm">Bank {props.bank}</Text>
-            <Text className="text-gray-200 text-sm ml-auto">
-              Norek: {props.norek}
+            <Text className="text-gray-200 text-sm font-psemibold">Bank {props.bank}</Text>
+            <Text className="text-gray-200 text-sm font-pregular ml-auto">
+              {props.norek}
             </Text>
           </View>
         </View>

@@ -29,19 +29,19 @@ const ProblemDetail = () => {
           <Text className="text-center pt-5 font-psemibold text-xl text-gray-500">Detil Permasalahan</Text>
           <View className="my-3 border border-bluesk">          
             <View className="px-3">
-              <View className="flex-row py-1">
+              <View className="py-1">
                 <Text className="text-gray-500 font-psemibold text-sm">Email: </Text>
                 <Text className="text-gray-500 font-pregular text-sm">{selectedProblem.email}</Text>
               </View>
-              <View className="flex-row py-1">
+              <View className="py-1">
                 <Text className="text-gray-500 font-psemibold text-sm">Bank: </Text>
                 <Text className="text-gray-500 font-pregular text-sm">{selectedProblem.bank}</Text>
               </View>
-              <View className="flex-row py-1">
+              <View className="py-1">
                 <Text className="text-gray-500 font-psemibold text-sm">Nomor rekening: </Text>
                 <Text className="text-gray-500 font-pregular text-sm">{selectedProblem.norek.slice(0, 3) + '-' + selectedProblem.norek.slice(3, 6) + '-' + selectedProblem.norek.slice(6)}</Text>   
               </View>
-              <View className="flex-row py-1">
+              <View className="py-1">
                 <Text className="text-gray-500 font-psemibold text-sm">Deskripsi: </Text>
                 <Text className="text-gray-500 font-pregular text-sm">{selectedProblem.description}</Text>
               </View>
