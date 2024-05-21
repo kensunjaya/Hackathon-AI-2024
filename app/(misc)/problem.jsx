@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, Text, View} from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, View} from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from "../../components/CustomButton";
@@ -170,17 +170,19 @@ const DropdownComponent = () => {
   const [selectedValue2, setSelectedValue2] = useState(null);
   const [selectedValue3, setSelectedValue3] = useState(null);
   const [selectedValue4, setSelectedValue4] = useState(null);
+  const [masalahLainnya, setMasalahLainnya] = useState(null);
   const [dataPribadi, setDataPribadi] = useState({
     alamat: null,
     pekerjaan: null,
     kewarganegaraan: null,
   });
+  let berkas = [];
   const [alamat, setAlamat] = useState(null);
   const { selectedBank, userData } = useUser();
 
   const mintaDataPribadi = () => {
     return (
-      <View className="border py-3 px-4">
+      <View className="border border-btn_primary py-3 mt-4 px-4">
         <Text className="font-psemibold text-sm text-btn_primary">Data Pribadi</Text>
         <FormField
           title="Alamat Rumah"
@@ -216,8 +218,13 @@ const DropdownComponent = () => {
     selectedValue2 ? descriptionBuilder += ', ' + subdata1[selectedValue1].find(obj => obj.value === selectedValue2).label : {};
     selectedValue3 ? descriptionBuilder += ', ' + subdata2[selectedValue2].find(obj => obj.value === selectedValue3).label : {};
     selectedValue4 ? descriptionBuilder += ', ' + subdata3[selectedValue3].find(obj => obj.value === selectedValue4).label : {};
+
+    dataPribadi.alamat ? (berkas.push({ title: 'Alamat Lengkap', value: dataPribadi.alamat })) : {};
+    dataPribadi.pekerjaan ? (berkas.push({ title: 'Pekerjaan', value: dataPribadi.pekerjaan })) : {};
+    dataPribadi.kewarganegaraan ? (berkas.push({ title: 'Kewarganegaraan', value: dataPribadi.kewarganegaraan })) : {};
+
     try {
-      await postProblem(selectedBank.bank, [], descriptionBuilder, userData.email, selectedBank.norek); // ini nanti array kosongnya diganti dengan berkas yang dilampirkan user
+      await postProblem(selectedBank.bank, berkas, descriptionBuilder, userData.email, selectedBank.norek); // ini nanti array kosongnya diganti dengan berkas yang dilampirkan user
       await postRiwayat(selectedBank.bank, descriptionBuilder, new Date(), userData.email);
       Alert.alert("Success", "Masalah berhasil diajukan. Cek inbox Anda secara berkala untuk mendapatkan informasi lebih lanjut.");
     }
@@ -232,42 +239,43 @@ const DropdownComponent = () => {
 
   return (
     <SafeAreaView className="h-full bg-primary flex-1 pt-5">
-    <View className="items-center pt-5 pb-3">
-      <Text className="font-psemibold text-xl">Rekening {selectedBank.bank}</Text>
-      <Text className="font-pregular text-xl">{selectedBank.norek.slice(0, 3) + '-' + selectedBank.norek.slice(3, 6) + '-' + selectedBank.norek.slice(6)}</Text>
-    </View>
-    <Dropdown
-      style={styles.dropdown}
-      placeholderStyle={styles.placeholderStyle}
-      selectedTextStyle={styles.selectedTextStyle}
-      inputSearchStyle={styles.inputSearchStyle}
-      iconStyle={styles.iconStyle}
-      data={data1}
-      search
-      maxHeight={300}
-      labelField="label"
-      valueField="value"
-      placeholder="Pilih permasalahan"
-      searchPlaceholder="Search..."
-      value={selectedValue1}
-      onChange={item => {
-        setSelectedValue1(item.value);
-        setSelectedValue2(null); // Reset the second dropdown
-        setSelectedValue3(null); // Reset the third dropdown
-        setSelectedValue4(null); // Reset the fourth dropdown
-      }}
-    />
-    {selectedValue1 === "OTHER" && (
-      <FormField
-        title="Masalah lainnya"
-        value={masalahLainnya}
-        handleChangeText={(e) => setMasalahLainnya(e)}
-        otherStyles="mt-7 mx-4"
-        keyboardTypes="default"
-        placeholder="Jelaskan permasalahan Anda"
-      />
-    )}
-    {subdata1[selectedValue1] && (
+      <ScrollView>      
+        <View className="items-center pt-5 pb-3">
+          <Text className="font-psemibold text-xl">Rekening {selectedBank.bank}</Text>
+          <Text className="font-pregular text-xl">{selectedBank.norek.slice(0, 3) + '-' + selectedBank.norek.slice(3, 6) + '-' + selectedBank.norek.slice(6)}</Text>
+        </View>
+        <Dropdown
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={data1}
+          search
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder="Pilih permasalahan"
+          searchPlaceholder="Search..."
+          value={selectedValue1}
+          onChange={item => {
+            setSelectedValue1(item.value);
+            setSelectedValue2(null); // Reset the second dropdown
+            setSelectedValue3(null); // Reset the third dropdown
+            setSelectedValue4(null); // Reset the fourth dropdown
+          }}
+        />
+        {selectedValue1 === "OTHER" && (
+          <FormField
+            title="Masalah lainnya"
+            value={masalahLainnya}
+            handleChangeText={(e) => setMasalahLainnya(e)}
+            otherStyles="my-4 mx-4"
+            keyboardTypes="default"
+            placeholder="Jelaskan permasalahan Anda"
+          />
+        )}
+        {subdata1[selectedValue1] && (
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
@@ -344,6 +352,7 @@ const DropdownComponent = () => {
           />
         </View>
       )}
+      </ScrollView>
     </SafeAreaView>
   );
 };
