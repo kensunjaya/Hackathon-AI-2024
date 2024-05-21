@@ -334,7 +334,7 @@ const DropdownComponent = () => {
         <Text className="font-psemibold text-gray-700 text-sm my-5 text-center">Mohon lengkapi semua field yang tersedia</Text>
       ) : (
         <View>
-          {mintaDataPribadi()} {/*Ini contoh ajaa*/}
+          {mintaDataPribadi()}
           <CustomButton
             title="Ajukan masalah"
             handlePress={handleSubmit}
