@@ -215,7 +215,7 @@ const DropdownComponent = () => {
         setSelectedValue4(null); // Reset the fourth dropdown
       }}
     />
-    {selectedValue1 && (
+    {subdata1[selectedValue1] && (
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
@@ -237,7 +237,7 @@ const DropdownComponent = () => {
           }}
         />
       )}
-      {selectedValue2 && (
+      {subdata2[selectedValue2] && (
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
@@ -258,7 +258,7 @@ const DropdownComponent = () => {
           }}
         />
       )}
-      {selectedValue3 && (
+      {subdata3[selectedValue3] && (
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
@@ -278,13 +278,15 @@ const DropdownComponent = () => {
           }}
         />
       )}
-      <CustomButton
-        title="Submit"
-        handlePress={handleSubmit}
-        containerStyles="bg-btn_primary mx-3 my-5"
-        textStyles="text-white font-pregular"
-        isLoading={false}
-      />
+      {(!selectedValue1 || (!selectedValue2 && (subdata1[selectedValue1])) || (!selectedValue3 && (subdata2[selectedValue2])) || (!selectedValue4 && (subdata3[selectedValue3]))) ? (<></>) : (
+        <CustomButton
+          title="Submit"
+          handlePress={handleSubmit}
+          containerStyles="bg-btn_primary mx-3 my-5"
+          textStyles="text-white font-pregular"
+          isLoading={false}
+        />
+      )}
     </SafeAreaView>
   );
 };
