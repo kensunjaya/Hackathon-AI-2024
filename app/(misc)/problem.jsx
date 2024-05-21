@@ -8,6 +8,8 @@ import { useUser } from '../hooks/Context';
 import { postProblem, postRiwayat } from '../../utility/backend';
 import FormField from '../../components/FormField';
 
+
+
 const data1 = [
   { label: 'Masalah dengan kartu ATM', value: 'ATM' },
   { label: 'Masalah dengan transaksi', value: 'TRANSACTION' },
@@ -168,8 +170,45 @@ const DropdownComponent = () => {
   const [selectedValue2, setSelectedValue2] = useState(null);
   const [selectedValue3, setSelectedValue3] = useState(null);
   const [selectedValue4, setSelectedValue4] = useState(null);
-  const [masalahLainnya, setMasalahLainnya] = useState(null);
+  const [dataPribadi, setDataPribadi] = useState({
+    alamat: null,
+    pekerjaan: null,
+    kewarganegaraan: null,
+  });
+  const [alamat, setAlamat] = useState(null);
   const { selectedBank, userData } = useUser();
+
+  const mintaDataPribadi = () => {
+    return (
+      <View className="border py-3 px-4">
+        <Text className="font-psemibold text-sm text-btn_primary">Data Pribadi</Text>
+        <FormField
+          title="Alamat Rumah"
+          value={dataPribadi.alamat}
+          handleChangeText={(e) => setDataPribadi({ ...dataPribadi, alamat: e })}
+          otherStyles="mt-4"
+          keyboardTypes="default"
+          placeholder="Alamat Lengkap"
+        />
+        <FormField
+          title="Pekerjaan"
+          value={dataPribadi.pekerjaan}
+          handleChangeText={(e) => setDataPribadi({ ...dataPribadi, pekerjaan: e })}
+          otherStyles="mt-4"
+          keyboardTypes="default"
+          placeholder="Pekerjaan"
+        />
+        <FormField
+          title="Kewarganegaraan"
+          value={dataPribadi.kewarganegaraan}
+          handleChangeText={(e) => setDataPribadi({ ...dataPribadi, kewarganegaraan: e })}
+          otherStyles="mt-4"
+          keyboardTypes="default"
+          placeholder="Kewarganegaraan"
+        />
+      </View>
+    )
+  }
 
   const handleSubmit = async () => { // later handleSubmit ini boleh dipindahin ke page submitProblem.jsx, jangan lupa import component dan library nya
     let descriptionBuilder = data1.find(obj => obj.value === selectedValue1).label;
@@ -294,13 +333,16 @@ const DropdownComponent = () => {
       {(!selectedValue1 || (selectedValue1 === "OTHER" && !masalahLainnya) || (!selectedValue2 && (subdata1[selectedValue1])) || (!selectedValue3 && (subdata2[selectedValue2])) || (!selectedValue4 && (subdata3[selectedValue3]))) ? (
         <Text className="font-psemibold text-gray-700 text-sm my-5 text-center">Mohon lengkapi semua field yang tersedia</Text>
       ) : (
-        <CustomButton
-          title="Ajukan masalah"
-          handlePress={handleSubmit}
-          containerStyles="bg-btn_primary mx-4 my-10"
-          textStyles="text-white font-pregular"
-          isLoading={false}
-        />
+        <View>
+          {mintaDataPribadi()} {/*Ini contoh ajaa*/}
+          <CustomButton
+            title="Ajukan masalah"
+            handlePress={handleSubmit}
+            containerStyles="bg-btn_primary mx-4 my-10"
+            textStyles="text-white font-pregular"
+            isLoading={false}
+          />
+        </View>
       )}
     </SafeAreaView>
   );
