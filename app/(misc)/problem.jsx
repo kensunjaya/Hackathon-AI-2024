@@ -6,6 +6,7 @@ import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
 import { useUser } from '../hooks/Context';
 import { postProblem, postRiwayat } from '../../utility/backend';
+import FormField from '../../components/FormField';
 
 const data1 = [
   { label: 'Masalah dengan kartu ATM', value: 'ATM' },
@@ -167,10 +168,12 @@ const DropdownComponent = () => {
   const [selectedValue2, setSelectedValue2] = useState(null);
   const [selectedValue3, setSelectedValue3] = useState(null);
   const [selectedValue4, setSelectedValue4] = useState(null);
+  const [masalahLainnya, setMasalahLainnya] = useState(null);
   const { selectedBank, userData } = useUser();
 
   const handleSubmit = async () => { // later handleSubmit ini boleh dipindahin ke page submitProblem.jsx, jangan lupa import component dan library nya
     let descriptionBuilder = data1.find(obj => obj.value === selectedValue1).label;
+    masalahLainnya ? descriptionBuilder += ', ' + masalahLainnya : {};
     selectedValue2 ? descriptionBuilder += ', ' + subdata1[selectedValue1].find(obj => obj.value === selectedValue2).label : {};
     selectedValue3 ? descriptionBuilder += ', ' + subdata2[selectedValue2].find(obj => obj.value === selectedValue3).label : {};
     selectedValue4 ? descriptionBuilder += ', ' + subdata3[selectedValue3].find(obj => obj.value === selectedValue4).label : {};
@@ -215,6 +218,16 @@ const DropdownComponent = () => {
         setSelectedValue4(null); // Reset the fourth dropdown
       }}
     />
+    {selectedValue1 === "OTHER" && (
+      <FormField
+        title="Masalah lainnya"
+        value={masalahLainnya}
+        handleChangeText={(e) => setMasalahLainnya(e)}
+        otherStyles="mt-7 mx-4"
+        keyboardTypes="default"
+        placeholder="Jelaskan permasalahan Anda"
+      />
+    )}
     {subdata1[selectedValue1] && (
         <Dropdown
           style={styles.dropdown}
@@ -278,11 +291,13 @@ const DropdownComponent = () => {
           }}
         />
       )}
-      {(!selectedValue1 || (!selectedValue2 && (subdata1[selectedValue1])) || (!selectedValue3 && (subdata2[selectedValue2])) || (!selectedValue4 && (subdata3[selectedValue3]))) ? (<></>) : (
+      {(!selectedValue1 || (selectedValue1 === "OTHER" && !masalahLainnya) || (!selectedValue2 && (subdata1[selectedValue1])) || (!selectedValue3 && (subdata2[selectedValue2])) || (!selectedValue4 && (subdata3[selectedValue3]))) ? (
+        <Text className="font-psemibold text-gray-700 text-sm my-5 text-center">Mohon lengkapi semua field yang tersedia</Text>
+      ) : (
         <CustomButton
-          title="Submit"
+          title="Ajukan masalah"
           handlePress={handleSubmit}
-          containerStyles="bg-btn_primary mx-3 my-5"
+          containerStyles="bg-btn_primary mx-4 my-10"
           textStyles="text-white font-pregular"
           isLoading={false}
         />
