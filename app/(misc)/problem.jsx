@@ -7,8 +7,7 @@ import { router } from "expo-router";
 import { useUser } from '../hooks/Context';
 import { postProblem, postRiwayat } from '../../utility/backend';
 import FormField from '../../components/FormField';
-
-
+import styles from '../config/dropdownstyle';
 
 const data1 = [
   { label: 'Masalah dengan kartu ATM', value: 'ATM' },
@@ -182,7 +181,7 @@ const DropdownComponent = () => {
 
   const mintaDataPribadi = () => {
     return (
-      <View className="border border-btn_primary py-3 mt-4 px-4">
+      <View className="py-3 mt-4">
         <Text className="font-psemibold text-sm text-btn_primary">Data Pribadi</Text>
         <FormField
           title="Alamat Rumah"
@@ -226,7 +225,7 @@ const DropdownComponent = () => {
     try {
       await postProblem(selectedBank.bank, berkas, descriptionBuilder, userData.email, selectedBank.norek); // ini nanti array kosongnya diganti dengan berkas yang dilampirkan user
       await postRiwayat(selectedBank.bank, descriptionBuilder, new Date(), userData.email);
-      Alert.alert("Success", "Masalah berhasil diajukan. Cek inbox Anda secara berkala untuk mendapatkan informasi lebih lanjut.");
+      Alert.alert("Sukses", "Berhasil mengajukan masalah. Mohon cek inbox Anda secara berkala untuk informasi lebih lanjut.");
     }
     catch (e) {
       Alert.alert("Error", "Gagal mengajukan masalah");
@@ -239,12 +238,13 @@ const DropdownComponent = () => {
 
   return (
     <SafeAreaView className="h-full bg-primary flex-1 pt-5">
-      <ScrollView>      
-        <View className="items-center pt-5 pb-3">
+      <ScrollView className="px-4">      
+        <View className="items-center pt-5 pb-7">
           <Text className="font-psemibold text-xl">Rekening {selectedBank.bank}</Text>
           <Text className="font-pregular text-xl">{selectedBank.norek.slice(0, 3) + '-' + selectedBank.norek.slice(3, 6) + '-' + selectedBank.norek.slice(6)}</Text>
         </View>
         <Dropdown
+          className="my-3"
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
@@ -270,13 +270,14 @@ const DropdownComponent = () => {
             title="Masalah lainnya"
             value={masalahLainnya}
             handleChangeText={(e) => setMasalahLainnya(e)}
-            otherStyles="my-4 mx-4"
+            otherStyles="my-4"
             keyboardTypes="default"
             placeholder="Jelaskan permasalahan Anda"
           />
         )}
         {subdata1[selectedValue1] && (
         <Dropdown
+          className="my-3"
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
@@ -299,6 +300,7 @@ const DropdownComponent = () => {
       )}
       {subdata2[selectedValue2] && (
         <Dropdown
+          className="my-3"
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
@@ -320,6 +322,7 @@ const DropdownComponent = () => {
       )}
       {subdata3[selectedValue3] && (
         <Dropdown
+          className="my-3"
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
@@ -346,7 +349,7 @@ const DropdownComponent = () => {
           <CustomButton
             title="Ajukan masalah"
             handlePress={handleSubmit}
-            containerStyles="bg-btn_primary mx-4 my-10"
+            containerStyles="bg-btn_primary my-10"
             textStyles="text-white font-pregular"
             isLoading={false}
           />
@@ -358,54 +361,3 @@ const DropdownComponent = () => {
 };
 
 export default DropdownComponent;
-
-const styles = StyleSheet.create({ 
-  dropdown: {
-    margin: 16,
-    height: 62,
-    backgroundColor: 'white',
-    borderRadius: 25,
-    borderColor: '#00000',
-    padding: 12,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0,
-    shadowRadius: 1.41,
-    elevation: 0,
-  },
-  icon: {
-    marginRight: 5,
-  },
-  item: {
-    padding: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  textItem: {
-    flex: 1,
-    fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
-  },
-  placeholderStyle: {
-    fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
-    color: '#D1D1D1',
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
-  inputSearchStyle: {
-    height: 42,
-    fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
-  },
-});

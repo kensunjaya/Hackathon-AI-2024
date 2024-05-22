@@ -26,8 +26,8 @@ const Home = () => {
           resizeMode="covern" />
         <View className="h-full bg-bluesk flex-1">
           <SafeAreaView className="pt-[1rem] relative h-full bg-primary rounded-t-[40px] px-5 flex-1">
-              <Text className="text-2xl text-center font-psemibold">Welcome, {namaDepan}</Text>
-              <Text className="text-xs text-center font-pregular">Silakan pilih rekening anda yang tersedia</Text>
+              <Text className="text-2xl text-center font-psemibold">Halo, {namaDepan}</Text>
+              <Text className="text-xs text-center font-pregular">Silakan pilih rekening Anda yang tersedia</Text>
               <View className="flex-row my-[3vh] flex-1">
                 <FlatList
                   // className="border"

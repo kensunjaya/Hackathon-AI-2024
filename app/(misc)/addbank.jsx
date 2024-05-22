@@ -10,10 +10,13 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { useUser, useUserUpdate } from "../hooks/Context";
+import { Dropdown } from "react-native-element-dropdown";
+import styles from "../config/dropdownstyle";
 
 const AddBank = () => {
   const { userData, bankData } = useUser();
   const { updateUserData } = useUserUpdate();
+  // console.log('Bank Data: ', bankData);
   const dataRekening = userData.rekening;
   
   const [bankOpen, setBankOpen] = useState(false);
@@ -46,6 +49,7 @@ const AddBank = () => {
       finally{
         setIsSubmitting(false);
         updateUserData();
+        Alert.alert("Sukses", "Berhasil menambahkan rekening");
         router.push("/home");
       }
     }
@@ -58,8 +62,27 @@ const AddBank = () => {
         resizeMode="covern"
       />
       <View className="h-full bg-beige flex-1">
-        <View className="bg-primary h-full rounded-t-[40px] w-full px-4 flex-1">
-          <DropDownPicker
+        <View className="bg-primary h-full rounded-t-[40px] w-full flex-1">
+        <Dropdown
+          className="m-4 mt-10"
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={bankFormData}
+          search
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder="Pilih bank"
+          searchPlaceholder="Search..."
+          value={bankData}
+          onChange={item => {
+            setBankValue({name: item.value.name, logo: item.value.logo});
+          }}
+        />
+          {/* <DropDownPicker
             open={bankOpen}
             value={bankValue}
             items={bankFormData}
@@ -75,18 +98,18 @@ const AddBank = () => {
             }}
             zIndex={9999}
             dropDownContainerStyle={{borderWidth: 0, borderRadius: 20, backgroundColor: 'white'}}
-          />
+          /> */}
           <FormField
             title="Nomor Rekening"
             value={norek}
             handleChangeText={(e) => setNorek(e)}
-            otherStyles="mt-7"
+            otherStyles="mt-4 mx-4"
             placeholder="Nomor Rekening"
           />
           <CustomButton
             title="Tambah Bank"
             handlePress={submit}
-            containerStyles="w-full mt-7 bg-btn_primary"
+            containerStyles="mt-10 bg-btn_primary mx-4"
             textStyles="text-white"
             isLoading={isSubmitting}
           />

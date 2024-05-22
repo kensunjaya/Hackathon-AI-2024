@@ -35,7 +35,7 @@ const SendProblemResponse = () => {
         const docRef = await updateDoc(doc(db, "users", selectedProblem.email), {
           inbox: userdata.inbox,
         });
-        Alert.alert("Success", "Pesan berhasil dikirim ke inbox nasabah")
+        Alert.alert("Sukses", "Pesan berhasil dikirim ke inbox nasabah")
       }
       catch(e) {
         console.error("Error adding document: ", e);

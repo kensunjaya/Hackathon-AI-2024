@@ -39,7 +39,7 @@ const editProfile = () => {
         noTelp: form.noTelp,
       }).then(() => {
         updateUserData();
-        Alert.alert("Success", "Profile berhasil diubah");
+        Alert.alert("Sukses", "Berhasil mengubah profil");
         router.push("/profile");
       });
     } catch (e) {

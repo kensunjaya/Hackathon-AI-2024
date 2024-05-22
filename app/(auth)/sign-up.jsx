@@ -14,12 +14,12 @@ import { getDoc, getFirestore } from "firebase/firestore";
 import {doc, setDoc} from "firebase/firestore";
 import DropDownPicker from "react-native-dropdown-picker";
 import { bankData, useUser } from "../hooks/Context";
+import { Dropdown } from "react-native-element-dropdown";
+import styles from "../config/dropdownstyle";
 
 const SignUp = () => {
   const { bankData } = useUser();
-  const [bankOpen, setBankOpen] = useState(false);
   const [bankValue, setBankValue] = useState(null);
-  const [bankFormData, setBankFormData] = useState(bankData);
   
   const [form, setForm] = useState({
     nik: "",
@@ -60,13 +60,14 @@ const SignUp = () => {
             rekening: [{namabank : bankValue.name, norek: form.noRekening, logo: bankValue.logo }], // at least 1 rekening didaftarkan saat registrasi
             riwayat: [],
           });
+          Alert.alert("Sukses", "Akun Anda berhasil didaftarkan");
+          router.push("/sign-in");
       }
       catch(e){
         console.error("Error adding document: ", e);
       }
       finally{
         setIsSubmitting(false);
-        router.push("/sign-in");
       }
     }
   };
@@ -116,26 +117,26 @@ const SignUp = () => {
             title="Email"
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e })}
-            otherStyles="mt-7"
+            otherStyles="my-7"
             placeholder="Email"
           />
-          <DropDownPicker
-            open={bankOpen}
-            value={bankValue}
-            items={bankFormData}
-            setOpen={setBankOpen}
-            setValue={setBankValue}
-            setItems={setBankFormData}
-            placeholder="  Pilih Bank"
-            style={{borderWidth: 0, borderRadius: 25, height: 62, backgroundColor: 'white', marginTop: 25}}
-            textStyle={{
-              fontSize: 15,
-              fontFamily: 'Poppins-SemiBold',
-              color: (bankValue ? 'black' : '#D1D1D1'),
+          <Dropdown
+            style={styles.dropdown}
+            placeholderStyle={styles.placeholderStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            inputSearchStyle={styles.inputSearchStyle}
+            iconStyle={styles.iconStyle}
+            data={bankData}
+            search
+            maxHeight={300}
+            labelField="label"
+            valueField="value"
+            placeholder="Pilih bank"
+            searchPlaceholder="Search..."
+            value={bankData}
+            onChange={item => {
+              setBankValue({name: item.value.name, logo: item.value.logo});
             }}
-            zIndex={9999}
-            listMode="SCROLLVIEW"
-            dropDownContainerStyle={{borderWidth: 0, borderRadius: 20, backgroundColor: 'white'}}
           />
           <FormField
             title="No Rekening"

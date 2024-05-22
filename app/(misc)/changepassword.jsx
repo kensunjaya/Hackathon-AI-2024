@@ -35,7 +35,7 @@ const AddBank = () => {
         await updateDoc(doc(db, "users", userData.email), {
           password: newPassword,
         }).then(() => {updatePassword(auth.currentUser, newPassword)});
-        Alert.alert("Success", "Password berhasil diubah");
+        Alert.alert("Sukses", "Password berhasil diubah");
         router.push("/profile");
       }
       catch(e) {
