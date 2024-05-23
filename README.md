@@ -30,3 +30,13 @@ or
 npm run start
 ```
 4. Login to Expo (if prompted)
+
+## Teller's account credential
+```
+Email    : teller@cisuga.baits.id
+Password : teller123
+```
+<div style="flex">
+  <img src="https://imgur.com/sartMcQ.png" width=30% height=30%>
+  <img src="https://imgur.com/eD1Bt1g.png" width=30% height=30%>
+</div>
