@@ -97,7 +97,6 @@ const CustomCardInbox = (props) => {
   return (
     <TouchableOpacity
       className="bg-white rounded-[20px] mb-[3vh] flex p-5"
-      onPress={props.handlePress}
       activeOpacity={0.7}
     >
       <View className="items-end flex-row">
