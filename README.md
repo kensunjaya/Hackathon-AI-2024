@@ -9,7 +9,7 @@ BAITS is an automated bank teller queue system, aimed for disabilities (deaf) wh
 # Running the app locally
 ## Pre-requisites
 - Node.js
-- Expo Go
+- Expo Go application on Android / iOS device
 - Android / iOS emulator (or a physical device)
 
 1. Clone this repository, then enter the directory
@@ -29,3 +29,4 @@ or
 ```
 npm run start
 ```
+4. Login to Expo (if prompted)
