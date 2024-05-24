@@ -37,6 +37,6 @@ Email    : teller@cisuga.baits.id
 Password : teller123
 ```
 <div style="flex">
-  <img src="https://imgur.com/sartMcQ.png" width=30% height=30%>
-  <img src="https://imgur.com/eD1Bt1g.png" width=30% height=30%>
+  <img src="https://imgur.com/sartMcQ.png" width=40% height=40%>
+  <img src="https://imgur.com/eD1Bt1g.png" width=40% height=40%>
 </div>
